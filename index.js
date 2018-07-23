@@ -107,456 +107,459 @@ bot.on('channelCreate', channel => {
 
 
 bot.on('message', message => {
-    
-    if(message.content[0] === PREFIX){
 
-        let splitmessage = message.content.split(" / ");
-        
-        //commande info
 
-        if(splitmessage[0] === "!info"){
+  if (message.content[0] === PREFIX) {
 
-            bot.channels.get('469463455154438165').send(`Commande effectué `+ message +` par ${message.member} dans ${message.channel} `);
+    let splitmessage = message.content.split(" / ");
 
-            let botname = bot.user.username;
+    //commande info
 
-            let servname = message.guild.name;
+    if (splitmessage[0] === "!info") {
 
-            let servdate = message.guild.createdAt;
+      //log envoyé dans debug
 
-            let info = new Discord.RichEmbed()
+      bot.channels.get('469463455154438165').send(`Commande effectué ` + message + ` par ${message.member} dans ${message.channel} `);
 
-            .setTitle('Information Serveur')
+      //let botname = bot.user.username;
 
-            .setDescription(`Description en detail du serveur`)
+      let servname = message.guild.name;
 
-            .setColor("#ae3fff")
+      let servdate = message.guild.createdAt;
 
-            .setThumbnail("https://image.noelshack.com/fichiers/2018/29/3/1531929812-logio-ch.png")
+      let info = new Discord.RichEmbed()
 
-            .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+        .setTitle('Information Serveur')
 
-            .addField('Nom du serveur:', servname)
+        .setDescription(`Description en detail du serveur`)
 
-            .addField('Crée le:', servdate)
+        .setColor("#ae3fff")
 
-            .addField('Tu as rejoins le:', message.member.joinedAt)
+        .setThumbnail("https://image.noelshack.com/fichiers/2018/29/3/1531929812-logio-ch.png")
 
-            .addField('Total de membres:', message.guild.memberCount)
+        .setAuthor("Carlos Le BOT", bot.user.avatarURL)
 
-            .setFooter("Merci d'être la ! Ritara | ");
+        .addField('Nom du serveur:', servname)
 
-            return message.channel.send(info); 
+        .addField('Crée le:', servdate)
 
-            console.log(good);
+        .addField('Tu as rejoins le:', message.member.joinedAt)
 
-        }
+        .addField('Total de membres:', message.guild.memberCount)
 
-        //commande twitter
+        .setFooter("Merci d'être la ! Ritara | ");
 
-        else if(splitmessage[0] === "!twitter"){
+      return message.channel.send(info);
 
-            bot.channels.get('469463455154438165').send(`Commande effectué `+ message +` par ${message.member} dans ${message.channel} `);
-
-            let twitter = new Discord.RichEmbed()
-
-            .setTitle('**Twitter**')
-
-            .setDescription(`N'oubliez pas d'aller follow notre twitter`)
-
-            .setColor("#42c5f4")
-
-            .setThumbnail("https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png")
-
-            .setAuthor("Carlos Le BOT", bot.user.avatarURL)
-
-            .addField('Notre Twitter:', "https://twitter.com/Ritara_officiel")
-
-            .setFooter("Merci d'être la ! Ritara | ");
-
-            bot.channels.get('348070723904077827').send(twitter);
-
-            console.log(good);
-        }
-
-        //commande membre
-
-        else if(splitmessage[0] === "!membre"){
-
-            //on teste la taille
-
-            console.log(splitmessage.length)
-
-            if( splitmessage.length === 2 ){
-                
-                mentions = message.mentions.users.first();
-                
-
-                if(mentions == null){
-
-                    return
-                
-                }else {
-
-                    message.channel.send(`${mentions}`);
-
-                    var status = mentions.presence.status;
-
-                    var create = mentions.createdAt;
-
-                    var avataruser = mentions.avatarURL;
-
-                    //var infoserv = mentions.user.guildSettings
-
-                    console.log(mentions);
-
-                    //console.log(mentions.user.guild)
-
-                    var robot = mentions.bot;
-
-                    console.log(robot);
-
-                    console.log(status)
-
-                    //online
-
-                    if(status === "online"){
-
-                        if(robot === false ){
-
-                            let profil = new Discord.RichEmbed()
-
-                            .setTitle(`Information Sur **${mentions.username}**`)
-
-                            .setDescription(`Description en detail du profil`)
-
-                            .setColor("#ffffff")
-
-                            .setThumbnail(avataruser)
-
-                            .setAuthor("Carlos Le BOT", bot.user.avatarURL )
-
-                            .addField('Création du compte:', create )
-
-                            .addField('Origine :', "Humaine ( OUF !! :sweat_smile: )" )
-
-                            .addField('Status :', 'Connecté au serveur' )
-
-                            .setFooter("Merci d'être la ! Ritara | ");
-
-                            message.channel.send(profil)
-                            
-                        }else{
-                            let profil = new Discord.RichEmbed()
-
-                            .setTitle(`Information Sur **${mentions.username}**`)
-
-                            .setDescription(`Description en detail du profil`)
-
-                            .setColor("#ffffff")
-
-                            .setThumbnail(avataruser)
-
-                            .setAuthor("Carlos Le BOT", bot.user.avatarURL )
-
-                            .addField('Création du compte:', create )
-
-                            .addField('Origine :', "Robotique ( FUYEZZZ !! :scream: )" )
-
-                            .addField('Status :', 'Connecté au serveur' )
-
-                            .setFooter("Merci d'être la ! Ritara | ");
-
-                            message.channel.send(profil)
-                        }
-                    }
-
-                    if(status === "offline"){
-
-                        if(robot === false ){
-
-                            let profil = new Discord.RichEmbed()
-
-                            .setTitle(`Information Sur **${mentions.username}**`)
-
-                            .setDescription(`Description en detail du profil`)
-
-                            .setColor("#ffffff")
-
-                            .setThumbnail(avataruser)
-
-                            .setAuthor("Carlos Le BOT", bot.user.avatarURL )
-
-                            .addField('Création du compte:', create )
-
-                            .addField('Origine :', "Humaine ( OUF !! :sweat_smile: )" )
-
-                            .addField('Status :', 'Déconnecté' )
-
-                            .setFooter("Merci d'être la ! Ritara | ");
-
-                            message.channel.send(profil)
-                            
-                        }else{
-                            let profil = new Discord.RichEmbed()
-
-                            .setTitle(`Information Sur **${mentions.username}**`)
-
-                            .setDescription(`Description en detail du profil`)
-
-                            .setColor("#ffffff")
-
-                            .setThumbnail(avataruser)
-
-                            .setAuthor("Carlos Le BOT", bot.user.avatarURL )
-
-                            .addField('Création du compte:', create )
-
-                            .addField('Origine :', "Robotique ( FUYEZZZ !! :scream: )" )
-
-                            .addField('Status :', 'Déconnecté' )
-
-                            .setFooter("Merci d'être la ! Ritara | ");
-
-                            message.channel.send(profil)
-                        }
-                    }
-                }
-                        
-
-                
-
-        }
-
-        //erreur pas de parametre
-        
-        else{
-
-            let erreur = new Discord.RichEmbed()
-
-                .setColor("#960d0d")
-
-                .setTitle('**ERREUR**')
-
-                .addField("Il s'emblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié de membre")
-                
-                .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
-
-                return message.channel.send(erreur); 
-
-                console.log("error");
-
-        }
+      console.log(good);
 
     }
-    // commande !help
-    else if(splitmessage[0] === "!help"){
 
-        let jour =  message.createdAt ;
+    //commande twitter
+    else if (splitmessage[0] === "!twitter") {
 
-        let help = new Discord.RichEmbed()
+      bot.channels.get('469463455154438165').send(`Commande effectué ` + message + ` par ${message.member} dans ${message.channel} `);
 
-            .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+      let twitter = new Discord.RichEmbed()
 
-            .setColor("#ae3fff")
+        .setTitle('**Twitter**')
 
-            .setTitle('Guide D\'utilisation')
+        .setDescription(`N'oubliez pas d'aller follow notre twitter`)
 
-            .addBlankField(true)
+        .setColor("#42c5f4")
 
-            .setDescription('Tu veux en savoir plus sur moi ? Lis mon guide d\'utilisation !')
+        .setThumbnail("https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png")
 
-            .addBlankField(true)
+        .setAuthor("Carlos Le BOT", bot.user.avatarURL)
 
-            .addField("**!info**", "Tu veux en savoir plus a propos du serveur ? Alors ecrit cette commande.")
+        .addField('Notre Twitter:', "https://twitter.com/Ritara_officiel")
 
-            .addBlankField(true)
+        .setFooter("Merci d'être la ! Ritara | ");
 
-            .addField("**!mesinfos**", "Tu veux avoir tes propres infos ? Alors ecrit cette commande.")
+      bot.channels.get('348070723904077827').send(twitter);
 
-            .addBlankField(true)
-
-            .addField("!membre  /  @mention", "Tu veux en savoir plus a propos d'une personne du serveur ? Alors ecrit cette commande.")
-
-            .addBlankField(true)
-
-            .addField("!report  / motif / @mention (attention au espace !!!)", "Tu as un problème avec un membres du serveur ? Utilise cette commande mais attention a l'utilisé sans abus.")
-
-            .addBlankField(true)
-
-            .addField("Les prochaines options disponibles", "Elles arrivent bientôt faut juste que mon dev comprenne comment je marche :wink: .")
-                
-            .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532013009-help.png")
-
-            .setFooter("Merci d'être la ! Ritara | " + jour);
-
-            message.channel.send(help);
-
+      console.log(good);
     }
-    
-    // commande !mesinfo
-    else if(splitmessage[0] === "!mesinfos"){
-        
-    
-        let mesinfo = new Discord.RichEmbed()
 
-            .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+    //commande membre
+    else if (splitmessage[0] === "!membre") {
 
-            .setColor("#ae3fff")
+      //on teste la taille
 
-            .setTitle('Vos Information')
+      console.log(splitmessage.length)
 
-            .setDescription('Tu voulais t\'es infos les voila')
+      if (splitmessage.length === 2) {
 
-            .addField("Tu as créé ton compte le :", message.member.user.createdAt, true)
+        mentions = message.mentions.users.first();
 
-            .addField("Tu nous as rejoins le :", message.member.joinedAt, true)
 
-            .addField("Ton rôle est :",  message.member.highestRole , false)
+        if (mentions == null) {
 
-            .addField("Ton pseudo actuel sur le serveur :",  message.member.nickname , false)
-                
-            .setThumbnail(message.member.user.avatarURL)
+          return
 
-            .setFooter("Merci d'être la ! Ritara | ");
+        } else {
 
-            message.channel.send(mesinfo);
+          message.channel.send(`${mentions}`);
 
-    }
-    //tiket report
+          var status = mentions.presence.status;
 
-    else if(splitmessage[0] === "!report"){
+          var create = mentions.createdAt;
 
-        //on teste la taille du split
+          var avataruser = mentions.avatarURL;
 
-        if(splitmessage.length === 3){
+          //var infoserv = mentions.user.guildSettings
 
-            var motif = splitmessage[1];
-            mention = message.mentions.users.first();
+          console.log(mentions);
 
-            if(mention == null){
-                return
+          //console.log(mentions.user.guild)
+
+          var robot = mentions.bot;
+
+          console.log(robot);
+
+          console.log(status)
+
+          //online
+
+          if (status === "online") {
+
+            if (robot === false) {
+
+              let profil = new Discord.RichEmbed()
+
+                .setTitle(`Information Sur **${mentions.username}**`)
+
+                .setDescription(`Description en detail du profil`)
+
+                .setColor("#ffffff")
+
+                .setThumbnail(avataruser)
+
+                .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+
+                .addField('Création du compte:', create)
+
+                .addField('Origine :', "Humaine ( OUF !! :sweat_smile: )")
+
+                .addField('Status :', 'Connecté au serveur')
+
+                .setFooter("Merci d'être la ! Ritara | ");
+
+              message.channel.send(profil)
+
+            } else {
+              let profil = new Discord.RichEmbed()
+
+                .setTitle(`Information Sur **${mentions.username}**`)
+
+                .setDescription(`Description en detail du profil`)
+
+                .setColor("#ffffff")
+
+                .setThumbnail(avataruser)
+
+                .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+
+                .addField('Création du compte:', create)
+
+                .addField('Origine :', "Robotique ( FUYEZZZ !! :scream: )")
+
+                .addField('Status :', 'Connecté au serveur')
+
+                .setFooter("Merci d'être la ! Ritara | ");
+
+              message.channel.send(profil)
             }
-            
-            else{
+          }
 
-                let = report = new Discord.RichEmbed()
+          if (status === "offline") {
 
-                .setAuthor( message.member.nickname , message.author.avatarURL)
-    
-                .setColor("#6f3da5")
-    
-                .setTitle('Ticket Report')
-    
-                .setDescription(`${message.member} a envoyer un tiket de report contre ${mention} dans le salon ${message.channel}`)
-    
-                .addField("Motif du report", motif, true)
-    
-                .setFooter("Administreation Ritara | " + message.createdAt);
-    
-                message.channel.send(`${message.member} Votre reclamation va être prise en charge`);
+            if (robot === false) {
 
-                bot.channels.get('305345723472543745').send(report);
+              let profil = new Discord.RichEmbed()
 
+                .setTitle(`Information Sur **${mentions.username}**`)
 
+                .setDescription(`Description en detail du profil`)
+
+                .setColor("#ffffff")
+
+                .setThumbnail(avataruser)
+
+                .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+
+                .addField('Création du compte:', create)
+
+                .addField('Origine :', "Humaine ( OUF !! :sweat_smile: )")
+
+                .addField('Status :', 'Déconnecté')
+
+                .setFooter("Merci d'être la ! Ritara | ");
+
+              message.channel.send(profil)
+
+            } else {
+              let profil = new Discord.RichEmbed()
+
+                .setTitle(`Information Sur **${mentions.username}**`)
+
+                .setDescription(`Description en detail du profil`)
+
+                .setColor("#ffffff")
+
+                .setThumbnail(avataruser)
+
+                .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+
+                .addField('Création du compte:', create)
+
+                .addField('Origine :', "Robotique ( FUYEZZZ !! :scream: )")
+
+                .addField('Status :', 'Déconnecté')
+
+                .setFooter("Merci d'être la ! Ritara | ");
+
+              message.channel.send(profil)
             }
-
-        }
-        //erreur pas assez de parametre
-
-        else{
-
-            let erreur = new Discord.RichEmbed()
-
-                .setColor("#960d0d")
-
-                .setTitle('**ERREUR**')
-
-                .addField("Il s'emblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
-                
-                .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
-
-                return message.channel.send(erreur); 
-
-                console.log("error");
-
+          }
         }
 
-    }
 
-    else if(splitmessage[0] === '!say'){
-        
-        if(splitmessage.length === 2){
 
-            var msg = splitmessage[1]
 
-            bot.channels.get('305345723472543745').send(msg);
+      }
 
-        }
-
-        else{
-
-            let erreur = new Discord.RichEmbed()
-
-                .setColor("#960d0d")
-
-                .setTitle('**ERREUR**')
-
-                .addField("Il s'emblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
-                
-                .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
-
-                return message.channel.send(erreur); 
-
-                console.log("error");
-
-        }
-
-    }
-
-    // erreur commande inconue
-    else{
+      //erreur pas de parametre
+      else {
 
         let erreur = new Discord.RichEmbed()
 
-            .setColor("#960d0d")
+          .setColor("#960d0d")
 
-            .setTitle('**ERREUR**')
+          .setTitle('**ERREUR**')
 
-            .addField("Il s'emblerait que Carlos rencontre un problème !", "Commande inconue")
-            
-            .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+          .addField("Il s'emblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié de membre")
 
-            return message.channel.send(erreur); 
+          .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
-            console.log("error");
+        return message.channel.send(erreur);
+
+        console.log("error");
+
+      }
+
     }
-    
-    
-}
+    // commande !help
+    else if (splitmessage[0] === "!help") {
 
-var role = message.member.highestRole
+      let jour = message.createdAt;
 
-    if(message.channel.id === '348071630309949440' && message.author.id != bot.user.id){
+      let help = new Discord.RichEmbed()
 
-        console.log(role.name)
+        .setAuthor("Carlos Le BOT", bot.user.avatarURL)
 
-        if(role.name != 'President'){
+        .setColor("#ae3fff")
 
-            if(role.name != "Sodomite"){
+        .setTitle('Guide D\'utilisation')
 
-                if(role.name != "Ministres"){
+        .addBlankField(true)
 
-                    console.log('je peux repondre')
+        .setDescription('Tu veux en savoir plus sur moi ? Lis mon guide d\'utilisation !')
 
-                    message.channel.send(`${message.member} Ta demande va etre prise en compte !`);
+        .addBlankField(true)
 
-                    bot.channels.get('305345723472543745').send(`${message.member} A deposer un message dans le salon ${message.channel} !`);
-                }
-            }
+        .addField("**!info**", "Tu veux en savoir plus a propos du serveur ? Alors ecrit cette commande.")
+
+        .addBlankField(true)
+
+        .addField("**!mesinfos**", "Tu veux avoir tes propres infos ? Alors ecrit cette commande.")
+
+        .addBlankField(true)
+
+        .addField("!membre  /  @mention", "Tu veux en savoir plus a propos d'une personne du serveur ? Alors ecrit cette commande.")
+
+        .addBlankField(true)
+
+        .addField("!report  / motif / @mention (attention au espace !!!)", "Tu as un problème avec un membres du serveur ? Utilise cette commande mais attention a l'utilisé sans abus.")
+
+        .addBlankField(true)
+
+        .addField("Les prochaines options disponibles", "Elles arrivent bientôt faut juste que mon dev comprenne comment je marche :wink: .")
+
+        .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532013009-help.png")
+
+        .setFooter("Merci d'être la ! Ritara | " + jour);
+
+      message.channel.send(help);
+
+    }
+
+    // commande !mesinfo
+    else if (splitmessage[0] === "!mesinfos") {
+
+
+      let mesinfo = new Discord.RichEmbed()
+
+        .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+
+        .setColor("#ae3fff")
+
+        .setTitle('Vos Information')
+
+        .setDescription('Tu voulais t\'es infos les voila')
+
+        .addField("Tu as créé ton compte le :", message.member.user.createdAt, true)
+
+        .addField("Tu nous as rejoins le :", message.member.joinedAt, true)
+
+        .addField("Ton rôle est :", message.member.highestRole, false)
+
+        .addField("Ton pseudo actuel sur le serveur :", message.member.nickname, false)
+
+        .setThumbnail(message.member.user.avatarURL)
+
+        .setFooter("Merci d'être la ! Ritara | ");
+
+      message.channel.send(mesinfo);
+
+    }
+    //tiket report
+    else if (splitmessage[0] === "!report") {
+
+      //on teste la taille du split
+
+      if (splitmessage.length === 3) {
+
+        var motif = splitmessage[1];
+        mention = message.mentions.users.first();
+
+        if (mention == null) {
+          return
+        } else {
+
+          let = report = new Discord.RichEmbed()
+
+            .setAuthor(message.member.nickname, message.author.avatarURL)
+
+            .setColor("#6f3da5")
+
+            .setTitle('Ticket Report')
+            .setDescription(`${message.member} a envoyer un tiket de report contre ${mention} dans le salon ${message.channel}`)
+
+            .addField("Motif du report", motif, true)
+
+            .setFooter("Administreation Ritara | " + message.createdAt);
+
+          message.channel.send(`${message.member} Votre reclamation va être prise en charge`);
+
+          bot.channels.get('305345723472543745').send(report);
+
+
         }
+
+      }
+      //erreur pas assez de parametre
+      else {
+
+        let erreur = new Discord.RichEmbed()
+
+          .setColor("#960d0d")
+
+          .setTitle('**ERREUR**')
+
+          .addField("Il s'emblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
+
+          .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+        return message.channel.send(erreur);
+
+        console.log("error");
+
+      }
+
+    } else if (splitmessage[0] === '!say') {
+
+      if (splitmessage.length === 2) {
+
+        var msg = splitmessage[1]
+
+        bot.channels.get('305345723472543745').send(msg);
+
+      } else {
+
+        let erreur = new Discord.RichEmbed()
+
+          .setColor("#960d0d")
+
+          .setTitle('**ERREUR**')
+
+          .addField("Il s'emblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
+
+          .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+        return message.channel.send(erreur);
+
+        console.log("error");
+
+      }
+
+    } 
+    // erreur commande inconue
+    else {
+
+      let erreur = new Discord.RichEmbed()
+
+        .setColor("#960d0d")
+
+        .setTitle('**ERREUR**')
+
+        .addField("Il s'emblerait que Carlos rencontre un problème !", "Commande inconue")
+
+        .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+      return message.channel.send(erreur);
+
+      console.log("error");
     }
 
+
+  }
+
+  var role = message.member.highestRole
+
+  if (message.channel.id === '348071630309949440' && message.author.id != bot.user.id) {
+
+    console.log(role.name)
+
+    if (role.name != 'President') {
+
+      if (role.name != "Sodomite") {
+
+        if (role.name != "Ministres") {
+
+          console.log('je peux repondre')
+
+          message.channel.send(`${message.member} Ta demande va etre prise en compte !`);
+
+          bot.channels.get('305345723472543745').send(`${message.member} A deposer un message dans le salon ${message.channel} !`);
+        }
+      }
+    }
+  }
+
+  if(message.channel.id === '195917192800239626' || message.channel.id === '469463455154438165'){
+
+    var expresion = /pute|FDP|salope|fils de pute|enculer|juif|juifs|arabe|pd/i 
+
+    if(message.content.match(expresion)){
+
+      message.channel.send(`${message.member} S'il vous plait surveillez votre language ! :open_mouth: `)
+      bot.channels.get('305345723472543745').send(`${message.author.username} a utilisé un mot répertorié, dans le salon : ${message.channel} sont message a bien été suprimé`);
+      message.delete();
+
+    }
+
+  }
 
 });
 

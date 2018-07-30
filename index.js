@@ -583,8 +583,9 @@ bot.on('message', message => {
 
             .setColor("#6f3da5")
 
-            .setTitle('KICK')
-            .setDescription(`${message.member} a kick ${kuser}`)
+            .setTitle('Ticket du kick')
+              
+            .setDescription(`${message.member} a expulsé ${kuser} avec une puissance incroyable`)
 
             .addField("Motif du kick", kmotif, true)
 

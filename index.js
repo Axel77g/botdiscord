@@ -549,7 +549,7 @@ bot.on('message', message => {
 
   if(message.channel.id === '195917192800239626' || message.channel.id === '469463455154438165'){
 
-    var expresion = /pute|FDP|salope|fils de pute|enculer|juif|arabe|pd/i 
+    var expresion = /pute|FDP|salope|fils de pute|enculer|juif|arabe|pd|FTG|va te faire foutre|niquer ta mere|bâtard| chienne|ta race| conasse|michto|merdeu|tête de bite/i 
 
     if(message.content.match(expresion)){
 

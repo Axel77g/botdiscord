@@ -106,6 +106,7 @@ bot.on('channelCreate', channel => {
 });
 
 
+//evenement message
 bot.on('message', message => {
 
 
@@ -338,7 +339,7 @@ bot.on('message', message => {
 
           .setTitle('**ERREUR**')
 
-          .addField("Il s'emblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié de membre")
+          .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié de membre")
 
           .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
@@ -467,7 +468,7 @@ bot.on('message', message => {
 
           .setTitle('**ERREUR**')
 
-          .addField("Il s'emblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
+          .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
 
           .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
@@ -503,7 +504,124 @@ bot.on('message', message => {
 
       }
 
-    } 
+    }
+
+    else if(splitmessage[0] === "!kick"){
+
+      if (splitmessage.length === 3) {
+
+        var kmotif = splitmessage[1];
+        let kuser = message.guild.member(message.mentions.users.first());
+
+        if (kuser == null) {
+
+          let erreur = new Discord.RichEmbed()
+
+        .setColor("#960d0d")
+
+        .setTitle('**ERREUR**')
+
+        .addField("Il semblerait que Carlos rencontre un problème !", "Personne Introuvable")
+
+        .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+        return message.channel.send(erreur);
+
+        console.log("error");
+
+        } 
+        else{
+          //pas les permisions
+
+          if(!message.member.hasPermission('KICK_MEMBERS')){
+            
+            let erreur = new Discord.RichEmbed()
+
+            .setColor("#960d0d")
+
+            .setTitle('**ERREUR**')
+
+            .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas les permisions !")
+
+            .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+            return message.channel.send(erreur);
+
+            console.log("error");
+
+          }
+          //les permisions
+          else
+
+          {
+            //verif de la personne kick
+            if(kuser.hasPermission('KICK_MEMBERS')){
+
+              let erreur = new Discord.RichEmbed()
+
+              .setColor("#960d0d")
+
+              .setTitle('**ERREUR**')
+
+              .addField("Il semblerait que Carlos rencontre un problème !", "Imposible de kick cette personne !")
+
+              .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+              return message.channel.send(erreur);
+
+              console.log("error");
+
+
+            }
+            //personne kickable
+            else{
+
+
+              let = kick = new Discord.RichEmbed()
+
+            .setAuthor(message.member.nickname, message.author.avatarURL)
+
+            .setColor("#6f3da5")
+
+            .setTitle('KICK')
+            .setDescription(`${message.member} a kick ${kuser}`)
+
+            .addField("Motif du kick", kmotif, true)
+
+            .setFooter("Administreation Ritara | " + message.createdAt);
+
+            message.channel.send(`${kuser} a bien été kick par ${message.member} !`);
+
+            bot.channels.get('305345723472543745').send(kick);
+
+            message.guild.member(kuser).kick(kmotif)
+
+            }
+
+          }
+        }
+      }
+      else
+
+      {
+
+        let erreur = new Discord.RichEmbed()
+
+        .setColor("#960d0d")
+
+        .setTitle('**ERREUR**')
+
+        .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
+
+        .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+      return message.channel.send(erreur);
+
+      console.log("error");
+
+      }
+    }
+
     // erreur commande inconue
     else {
 
@@ -513,7 +631,7 @@ bot.on('message', message => {
 
         .setTitle('**ERREUR**')
 
-        .addField("Il s'emblerait que Carlos rencontre un problème !", "Commande inconue")
+        .addField("Il semblerait que Carlos rencontre un problème !", "Commande inconue")
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
@@ -521,8 +639,6 @@ bot.on('message', message => {
 
       console.log("error");
     }
-
-
   }
 
   var role = message.member.highestRole
@@ -549,16 +665,18 @@ bot.on('message', message => {
 
   if(message.channel.id === '195917192800239626' || message.channel.id === '469463455154438165'){
 
-    var expresion = /pute|FDP|salope|fils de pute|enculer|juif|arabe|pd|FTG|va te faire foutre|niquer ta mere|bâtard| chienne|ta race| conasse|michto|merdeu|tête de bite/i 
+    if(message.author.id != bot.user.id){
 
-    if(message.content.match(expresion)){
+      var expresion = /pute|FDP|salope|fils de pute|enculer|juif|arabe|pd|FTG|va te faire foutre|niquer ta mere|bâtard| chienne|ta race| conasse|michto|merdeu|tête de bite/i 
 
-      message.channel.send(`${message.member} S'il vous plait surveillez votre language ! :open_mouth: `)
-      bot.channels.get('305345723472543745').send(`${message.author.username} a utilisé un mot répertorié, dans le salon : ${message.channel} sont message a bien été suprimé`);
-      message.delete();
+      if(message.content.match(expresion)){
 
+        message.channel.send(`${message.member} S'il vous plait surveillez votre language ! :open_mouth: `)
+        bot.channels.get('305345723472543745').send(`${message.author.username} a utilisé un mot répertorié, dans le salon : ${message.channel} sont message a bien été suprimé`);
+        message.delete();
+
+      }
     }
-
   }
 
 });

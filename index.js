@@ -583,9 +583,9 @@ bot.on('message', message => {
 
             .setColor("#6f3da5")
 
-            .setTitle('Ticket du kick')
-              
-            .setDescription(`${message.member} a expulsé ${kuser} avec une puissance incroyable`)
+            .setTitle('KICK')
+
+            .setDescription(`${message.member} a été expulsé par ${kuser}`)
 
             .addField("Motif du kick", kmotif, true)
 
@@ -616,12 +616,136 @@ bot.on('message', message => {
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
-      return message.channel.send(erreur);
+        return message.channel.send(erreur);
 
-      console.log("error");
+        console.log("error");
 
       }
     }
+
+    else if(splitmessage[0] === "!ban"){
+
+      if (splitmessage.length === 3) {
+
+        var bmotif = splitmessage[1];
+        let buser = message.guild.member(message.mentions.users.first());
+
+        if (buser == null) {
+
+            let erreur = new Discord.RichEmbed()
+
+            .setColor("#960d0d")
+
+            .setTitle('**ERREUR**')
+
+            .addField("Il semblerait que Carlos rencontre un problème !", "Personne Introuvable")
+
+            .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+            return message.channel.send(erreur);
+
+            console.log("error");
+
+        } 
+        else{
+          //pas les permisions
+
+          if(!message.member.hasPermission('BAN_MEMBERS')){
+            
+            let erreur = new Discord.RichEmbed()
+
+            .setColor("#960d0d")
+
+            .setTitle('**ERREUR**')
+
+            .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas les permisions !")
+
+            .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+            return message.channel.send(erreur);
+
+            console.log("error");
+
+          }
+          //les permisions
+          else
+
+          {
+            //verif de la personne kick
+            if(buser.hasPermission('BAN_MEMBERS')){
+
+              let erreur = new Discord.RichEmbed()
+
+              .setColor("#960d0d")
+
+              .setTitle('**ERREUR**')
+
+              .addField("Il semblerait que Carlos rencontre un problème !", "Imposible de ban cette personne !")
+
+              .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+              return message.channel.send(erreur);
+
+              console.log("error");
+
+
+            }
+            //personne banable
+            else{
+
+                let = ban = new Discord.RichEmbed()
+
+                .setAuthor(message.member.nickname, message.author.avatarURL)
+
+                .setColor("#6f3da5")
+
+                .setTitle('BAN')
+                .setDescription(`${message.member} a été bannis par ${buser}`)
+
+                .addField("Motif du ban", bmotif, true)
+
+                .setFooter("Administreation Ritara | " + message.createdAt);
+
+                message.channel.send(`${buser} a bien été kick par ${message.member} !`);
+
+                bot.channels.get('305345723472543745').send(ban);
+
+                message.guild.member(buser).ban(bmotif)
+
+            }
+
+          }
+        }
+      }
+      else
+
+      {
+
+        let erreur = new Discord.RichEmbed()
+
+        .setColor("#960d0d")
+
+        .setTitle('**ERREUR**')
+
+        .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
+
+        .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+        return message.channel.send(erreur);
+
+        console.log("error");
+
+      }
+    }
+
+
+
+
+
+
+
+
+
 
     // erreur commande inconue
     else {

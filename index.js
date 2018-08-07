@@ -159,7 +159,7 @@ bot.on('message', message => {
 
         .addBlankField(true)
 
-        .addField("Version actuel:", "v 0.02.")
+        .addField("Version actuel:", "v 0.02")
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532013009-help.png")
 

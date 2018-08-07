@@ -2,31 +2,21 @@ const Discord = require('discord.js');
 
 var bot = new Discord.Client();
 
-var guild = new Discord.Guild();
-
 const PREFIX = "!";
-
-
-/*var anti_spam = require("discord-anti-spam");
- 
-antispam(bot, {
-  warnBuffer: 3, //Maximum amount of messages allowed to send in the interval time before getting
-  interval: 1000, // Amount of time in ms users can send a maximum of the maxBuffer variable before getting banned.
-  warningMessage: "stop spamming or I'll whack your head off.", // Warning message send to the us
-  maxDuplicatesWarning: 7,// Maximum amount of duplicate messages a user ca
-});*/
 
 bot.on('ready', () => {
 
-    console.log(good);
 
-    bot.user.setActivity('!info');
+  bot.user.setActivity('!info');
 
-    bot.channels.get('469463455154438165').send(`Je suis connecté ! :grin:`);
+  bot.channels.get('469463455154438165').send(`Je suis connecté ! :grin:`);
 
-    console.log(bot.user)
+  console.log(bot.user)
 
 });
+
+
+//evenement Nouveau membre
 
 bot.on('guildMemberAdd', member => {
 
@@ -684,5 +674,6 @@ bot.on('message', message => {
   }
 
 });
+
 
 bot.login(process.env.BOT_TOKEN);

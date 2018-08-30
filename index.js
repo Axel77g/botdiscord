@@ -250,7 +250,9 @@ bot.on('message', message => {
 
         .setFooter("Merci d'être la ! Ritara | " + date);
 
-        message.channel.send(info);
+        //message.channel.send(info);
+      
+        bot.channels.get('348070723904077827').send(info);
 
         
       T.get("users/search", {q: 'Ritara_officiel'}, function(err, data, response) {

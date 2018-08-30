@@ -2,6 +2,15 @@ const Discord = require('discord.js');
 
 var bot = new Discord.Client();
 
+var Twit = require('twit')
+
+var T = new Twit({
+  consumer_key:         process.env.consumer_key,
+  consumer_secret:      process.env.consumer_secret,
+  access_token:         process.env.access_token,
+  access_token_secret:  process.env.access_token_secret,
+});
+
 const PREFIX = "!";
 
 bot.on('ready', () => {
@@ -121,7 +130,13 @@ bot.on('channelCreate', channel => {
 
 bot.on('message', message => {
 
-    let date = message.createdAt
+      var now = new Date()
+      var jour = now.getDate()
+      var mois = now.getMonth()
+      var anee = now.getFullYear()
+      var hours = now.getHours()
+      var min = now.getMinutes()
+      var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
     // verif !
   if(message.content[0] === PREFIX){
     //split message
@@ -159,7 +174,7 @@ bot.on('message', message => {
 
         .addBlankField(true)
 
-        .addField("Version actuel:", "v 0.02")
+        .addField("Version actuel:", "v 0.02.")
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532013009-help.png")
 
@@ -237,6 +252,41 @@ bot.on('message', message => {
 
         message.channel.send(info);
 
+        
+      T.get("users/search", {q: 'Ritara_officiel'}, function(err, data, response) {
+
+        console.log(data[0])
+        var usernamet = "@" + data[0].screen_name
+        var follower = data[0].followers_count
+        var langue = data[0].lang
+        var photoURL = data[0].profile_image_url
+        var location = data[0].location
+        var favori = data[0].favourites_count
+      
+        let tweeter = new Discord.RichEmbed()
+      
+                .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+      
+                .setURL('https://twitter.com/Ritara_officiel')
+      
+                .setColor("#42c5f4")
+      
+                .setThumbnail(photoURL)
+      
+                .setTitle('Voici les Information de notre Twitter')
+      
+                .setDescription('Voici les informations concernant notre twitter n\'hésitez pas allez le follow')
+      
+                .addField("Notre Mention","["+usernamet+"](https://twitter.com/Ritara_officiel)")
+      
+                .addField("Follower", ":bird: " +follower, true)
+      
+                .addField("Like", ':heart: ' + favori, true)
+      
+                .setFooter("Merci d'être la ! Ritara | " + date, 'https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png');
+    
+                message.channel.send(tweeter);
+      });
     }
 
     else if(splitmessage[0] === '!membre'){
@@ -244,7 +294,7 @@ bot.on('message', message => {
       let userTarget = message.guild.member(message.mentions.users.first());
 
       console.log(userTarget)
-      
+
       let mesinfo = new Discord.RichEmbed()
 
         .setAuthor("Carlos Le BOT", bot.user.avatarURL)
@@ -407,12 +457,12 @@ bot.on('message', message => {
 
         console.log("error");
 
-        } 
+        }
         else{
           //pas les permisions
 
           if(!message.member.hasPermission('KICK_MEMBERS')){
-            
+
             let erreur = new Discord.RichEmbed()
 
             .setColor("#960d0d")
@@ -462,12 +512,12 @@ bot.on('message', message => {
             .setColor("#6f3da5")
 
             .setTitle('KICK')
-            
+
             .setDescription(`${message.member} a été expulsé par ${kuser}`)
 
             .addField("Motif du kick", kmotif, true)
 
-            .setFooter("Administreation Ritara | " + message.createdAt);
+            .setFooter("Administreation Ritara | " + date);
 
             message.channel.send(`${kuser} a bien été kick par ${message.member} !`);
 
@@ -524,12 +574,12 @@ bot.on('message', message => {
 
             console.log("error");
 
-        } 
+        }
         else{
           //pas les permisions
 
           if(!message.member.hasPermission('BAN_MEMBERS')){
-            
+
             let erreur = new Discord.RichEmbed()
 
             .setColor("#960d0d")
@@ -582,7 +632,7 @@ bot.on('message', message => {
 
                 .addField("Motif du ban", bmotif, true)
 
-                .setFooter("Administreation Ritara | " + message.createdAt);
+                .setFooter("Administreation Ritara | " + date);
 
                 message.channel.send(`${buser} a bien été kick par ${message.member} !`);
 
@@ -615,7 +665,48 @@ bot.on('message', message => {
 
       }
     }
+    else if(splitmessage[0] === '!tweet'){
 
+      //tweet search
+      searchtweet();
+      setInterval(searchtweet, 1000*60*20)
+
+      function searchtweet(){
+        T.get('statuses/user_timeline', {screen_name: 'Ritara_officiel', count: 1, exclude_replies: true, include_rts: false}, function(err, data, response) {
+
+          console.log(data[0])
+
+          console.log('tweet find')
+
+          const tweetinfo = [data[0].created_at, data[0].text, data[0].user.screen_name, data[0].retweet_count, data[0].favorite_count]
+
+          let newtweet = new Discord.RichEmbed()
+
+          .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+
+          .setColor("#42c5f4")
+
+          .setThumbnail("https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png")
+
+          .setTitle('Nouveau Tweet sur la page de @'+ tweetinfo[2])
+
+          .setDescription(tweetinfo[1])
+
+          .addField("Retweet", ':arrows_counterclockwise: ' +tweetinfo[3], true)
+
+          .addField("Like", ':heart: ' + tweetinfo[4], true)
+
+          .setFooter("Merci d'être la ! Ritara | " + date )
+
+          .addField("Allez Follow Notre Twitter pour ne rien manquer", '[@Ritara_officiel](https://twitter.com/Ritara_officiel) ');
+
+          bot.channels.get('348070723904077827').send(newtweet);
+
+        });
+      }
+
+    }
+    
     // erreur commande inconue
     else {
 
@@ -661,7 +752,7 @@ bot.on('message', message => {
 
     if(message.author.id != bot.user.id){
 
-      var expresion = /pute|FDP|salope|fils de pute|enculer|juif|arabe|pd|FTG|va te faire foutre|niquer ta mere|bâtard| chienne|ta race| conasse|michto|merdeu|tête de bite/i 
+      var expresion = /pute|FDP|salope|fils de pute|enculer|juif|arabe|pd|FTG|va te faire foutre|niquer ta mere|bâtard| chienne|ta race| conasse|michto|merdeu|tête de bite/i
 
       if(message.content.match(expresion)){
 
@@ -674,6 +765,5 @@ bot.on('message', message => {
   }
 
 });
-
 
 bot.login(process.env.BOT_TOKEN);

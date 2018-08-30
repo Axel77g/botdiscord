@@ -158,7 +158,7 @@ bot.on('message', message => {
 
         .addBlankField(true)
 
-        .addField("**!info**", "En utlisant cette commande tu auras toutes les infos concernant le serveur")
+        .addField("**!info**", "En utlisant cette commande tu auras toutes les infos concernant le serveur et de notre twitter (**MIS A JOUR V 0.03**)")
 
         .addBlankField(true)
 
@@ -174,7 +174,7 @@ bot.on('message', message => {
 
         .addBlankField(true)
 
-        .addField("Version actuel:", "v 0.02.")
+        .addField("Version actuel:", "v 0.03")
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532013009-help.png")
 

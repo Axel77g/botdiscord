@@ -1,14 +1,17 @@
 {
-    "name": "carlos",
-    "description": "botdiscord",
-    "version": "0.0.0",
-    "main": "index.js",
-    "script": {
-        "start": "node index.js"
-    },
-    "dependencies": {
-        "discord.js": "11.3.2",
-        "discord-anti-spam" : "1.1.2",
-        "request": "2.81.0"
-    }
+  "name": "carlosbot",
+  "version": "1.0.0",
+  "description": "discordbot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
+  },
+  "author": "LeFilsAJUL",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "twit": "^2.2.11"
+     "request": "2.81.0"
+  }
 }

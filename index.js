@@ -132,11 +132,15 @@ bot.on('message', message => {
 
       var now = new Date()
       var jour = now.getDate()
-      var mois = now.getMonth()
+      var mois = now.getMonth() + 1
+      if(mois < 10){
+        var mois = "0" + mois
+      }
       var anee = now.getFullYear()
       var hours = now.getHours()
       var min = now.getMinutes()
       var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
+      
     // verif !
   if(message.content[0] === PREFIX){
     //split message

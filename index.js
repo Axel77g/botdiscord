@@ -778,5 +778,61 @@ bot.on('message', message => {
   }
 });
 
+var stream = T.stream('statuses/filter', {track: 'Ritara'})
+ 
+var now = new Date()
+      var jour = now.getDate()
+      if(jour < 10){
+        var jour = "0" + jour
+      }
+      var mois = now.getMonth() + 1
+      if(mois < 10){
+        var mois = "0" + mois
+      }
+      var anee = now.getFullYear()
+
+      var hours = now.getHours() + 2
+      if(hours < 10){
+        var hours = "0" + hours
+      }
+      var min = now.getMinutes()
+      if(min < 10){
+        var min = "0" + min
+      }
+      var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
+
+stream.on('tweet', function (tweet) {
+  console.log(tweet)
+  if(tweet.user.screen_name == "Ritara_officiel"){
+
+    console.log ('Tweet From Ritara')
+
+    let newtweet = new Discord.RichEmbed()
+
+    .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+
+    .setColor("#42c5f4")
+
+    .setThumbnail("https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png")
+
+    .setTitle('Nouveau Tweet sur la page de @'+ tweet.user.screen_name)
+
+    .setDescription(tweet.text)
+
+    .addField("Retweet", ':arrows_counterclockwise: ' +tweet.retweet_count, true)
+
+    .addField("Like", ':heart: ' + tweet.favorite_count, true)
+
+    .setFooter("Merci d'être la ! Ritara | " + date )
+
+    .addField("Allez Follow Notre Twitter pour ne rien manquer", '[@Ritara_officiel](https://twitter.com/Ritara_officiel) ');
+
+    bot.channels.get('469463455154438165').send(newtweet)
+
+  }else{
+    console.log ('No Interest')
+  }
+})
+
 
 bot.login(process.env.BOT_TOKEN);

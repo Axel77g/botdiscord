@@ -130,22 +130,23 @@ bot.on('channelCreate', channel => {
 
 bot.on('message', message => {
 
-      vvar now = new Date()
+      var now = new Date().
+      
       var jour = now.getDate()
       if(jour < 10){
         var jour = "0" + jour
       }
-      var mois = now.getMonth() + 1
+      var mois = now.getMonth() + 1;
       if(mois < 10){
         var mois = "0" + mois
       }
-      var anee = now.getFullYear()
+      var anee = now.getFullYear();
 
-      var hours = now.getHours() + 2
+      var hours = now.getHours() + 2;
       if(hours < 10){
         var hours = "0" + hours
       }
-      var min = now.getMinutes()
+      var min = now.getMinutes();
       if(min < 10){
         var min = "0" + min
       }

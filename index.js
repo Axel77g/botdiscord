@@ -359,7 +359,7 @@ bot.on('message', message => {
 
         .setFooter("Merci d'être la ! Ritara | " + date);
 
-      bot.channels.get('348070723904077827').send(twitter);
+      bot.channels.get('485184306709266436').send(twitter);
     }
 
     //tiket report
@@ -713,7 +713,7 @@ bot.on('message', message => {
 
           .addField("Allez Follow Notre Twitter pour ne rien manquer", '[@Ritara_officiel](https://twitter.com/Ritara_officiel) ');
 
-          bot.channels.get('348070723904077827').send(newtweet);
+          bot.channels.get('485184306709266436').send(newtweet);
 
         });
       }

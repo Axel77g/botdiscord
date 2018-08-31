@@ -827,7 +827,7 @@ stream.on('tweet', function (tweet) {
 
     .addField("Allez Follow Notre Twitter pour ne rien manquer", '[@Ritara_officiel](https://twitter.com/Ritara_officiel) ');
 
-    bot.channels.get('469463455154438165').send(newtweet)
+    bot.channels.get('485184306709266436').send(newtweet)
 
   }else{
     console.log ('No Interest')

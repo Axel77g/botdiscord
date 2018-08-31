@@ -126,32 +126,28 @@ bot.on('channelCreate', channel => {
   }
 });
 
-//event message
-
 bot.on('message', message => {
 
-      var now = new Date().
-      
+      var now = new Date()
       var jour = now.getDate()
       if(jour < 10){
         var jour = "0" + jour
       }
-      var mois = now.getMonth() + 1;
+      var mois = now.getMonth() + 1
       if(mois < 10){
         var mois = "0" + mois
       }
-      var anee = now.getFullYear();
+      var anee = now.getFullYear()
 
-      var hours = now.getHours() + 2;
+      var hours = now.getHours() + 2
       if(hours < 10){
         var hours = "0" + hours
       }
-      var min = now.getMinutes();
+      var min = now.getMinutes()
       if(min < 10){
         var min = "0" + min
       }
       var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
-      
     // verif !
   if(message.content[0] === PREFIX){
     //split message
@@ -189,14 +185,13 @@ bot.on('message', message => {
 
         .addBlankField(true)
 
-        .addField("Version actuel:", "v 0.03")
+        .addField("Version actuel:", "v 0.03.")
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532013009-help.png")
 
         .setFooter("Merci d'être la ! Ritara | " + date);
 
-      //message.channel.send(help);
-      bot.channels.get('348070723904077827').send(help);
+      message.channel.send(help);
 
     }
 
@@ -231,6 +226,8 @@ bot.on('message', message => {
     }
 
     else if(splitmessage[0] === '!info'){
+
+      var pseudo = splitmessage[1]
 
       let nbChannels = message.guild.channels.array().length;
 
@@ -267,21 +264,20 @@ bot.on('message', message => {
         .setFooter("Merci d'être la ! Ritara | " + date);
 
         message.channel.send(info);
-      
-        
 
         
       T.get("users/search", {q: 'Ritara_officiel'}, function(err, data, response) {
 
-        console.log(data[0])
-        var usernamet = "@" + data[0].screen_name
-        var follower = data[0].followers_count
-        var langue = data[0].lang
-        var photoURL = data[0].profile_image_url
-        var location = data[0].location
-        var favori = data[0].favourites_count
-      
-        let tweeter = new Discord.RichEmbed()
+          console.log(data[0])
+          var usernamet = "@" + data[0].screen_name
+          var follower = data[0].followers_count
+          var langue = data[0].lang
+          var photoURL = data[0].profile_image_url
+          var location = data[0].location
+          var favori = data[0].favourites_count
+          var url = "https://twitter.com/" + usernamet
+
+          let tweeter = new Discord.RichEmbed()
       
                 .setAuthor("Carlos Le BOT", bot.user.avatarURL)
       
@@ -295,7 +291,7 @@ bot.on('message', message => {
       
                 .setDescription('Voici les informations concernant notre twitter n\'hésitez pas allez le follow')
       
-                .addField("Notre Mention","["+usernamet+"](https://twitter.com/Ritara_officiel)")
+                .addField("Notre Mention","["+usernamet+"]("+ url +")")
       
                 .addField("Follower", ":bird: " +follower, true)
       
@@ -303,7 +299,8 @@ bot.on('message', message => {
       
                 .setFooter("Merci d'être la ! Ritara | " + date, 'https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png');
     
-                message.channel.send(tweeter);
+                message.channel.send(tweeter);  
+     
       });
     }
 
@@ -442,8 +439,6 @@ bot.on('message', message => {
           .addField("Il s'emblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
 
           .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
-
-
 
         return message.channel.send(erreur);
 
@@ -724,7 +719,7 @@ bot.on('message', message => {
       }
 
     }
-    
+
     // erreur commande inconue
     else {
 
@@ -781,7 +776,7 @@ bot.on('message', message => {
       }
     }
   }
-
 });
+
 
 bot.login(process.env.BOT_TOKEN);

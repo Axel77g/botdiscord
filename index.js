@@ -739,7 +739,7 @@ bot.on('message', message => {
 
           if(value == "true" || value == "false"){
 
-          fs.writeFileSync('config.json', '{  "'+param+'" : '+value+' }', 'UTF-8');
+          fs.writeFileSync('https://ritara-web.000webhostapp.com/bot/config.json', '{  "'+param+'" : '+value+' }', 'UTF-8');
 
           console.log('Update Configuration');
 

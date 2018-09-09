@@ -739,7 +739,7 @@ bot.on('message', message => {
 
           if(value == "true" || value == "false"){
 
-          fs.writeFileSync('https://github.com/Axel77g/botdiscord/blob/master/config.json', '{  "'+param+'" : '+value+' }', 'UTF-8');
+          fs.writeFileSync('config.json', '{  "'+param+'" : '+value+' }', 'UTF-8');
 
           console.log('Update Configuration');
 

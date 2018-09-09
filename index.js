@@ -128,6 +128,11 @@ bot.on('channelCreate', channel => {
 
 bot.on('message', message => {
 
+      function transform(number){
+        number = "0" + number
+        return number
+      }
+
       var now = new Date()
       var jour = now.getDate()
       if(jour < 10){
@@ -651,7 +656,7 @@ bot.on('message', message => {
 
                 bot.channels.get('305345723472543745').send(ban);
 
-                message.guild.member(buser).kick(bmotif)
+                message.guild.member(buser).ban(bmotif)
 
             }
 
@@ -720,6 +725,72 @@ bot.on('message', message => {
 
     }
 
+    else if(splitmessage[0] === '!config'){
+
+      if(message.member.highestRole.name === "President"){
+
+        if(splitmessage.length === 3){
+
+          var param = splitmessage[1];
+
+          var value = splitmessage[2];
+
+          var fs = require('fs');
+
+          if(value == "true" || value == "false"){
+
+          fs.writeFileSync('config.json', '{  "'+param+'" : '+value+' }', 'UTF-8');
+
+          console.log('Update Configuration');
+
+          fs.writeFileSync('log.txt', "Update Configuration : "+ date+ "\n", 'UTF-8', {'flags': 'a+'});
+
+          message.channel.send('La Configuration a été mise a jour avec succes')
+
+          } else
+
+          {
+            console.log("error");
+            message.channel.send('La Configuration a été intérompu')
+          }
+
+        }
+        else
+        {
+
+          let erreur = new Discord.RichEmbed()
+
+          .setColor("#960d0d")
+
+          .setTitle('**ERREUR #201**')
+
+          .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
+
+          .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+        return message.channel.send(erreur);
+
+        console.log("error");
+
+        }
+      }else{
+
+        let erreur = new Discord.RichEmbed()
+
+            .setColor("#960d0d")
+
+            .setTitle('**ERREUR #101**')
+
+            .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas les permisions !")
+
+            .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+            return message.channel.send(erreur);
+
+            console.log("error");
+
+      }
+    }
     // erreur commande inconue
     else {
 
@@ -774,6 +845,68 @@ bot.on('message', message => {
         message.delete();
 
       }
+    }
+  }
+
+  if(message.member.highestRole.name === "Assemblée" || message.member.highestRole.name === "Sénateurs" || message.member.highestRole.name === "Amis"){
+
+    if(message.content.match(/discord.gg/)){
+
+      message.channel.send(`${message.member} Il est interdit d'envoyer des publicités concernant d'autre serveur discord !! :kissing_closed_eyes:`);
+
+      bot.channels.get('305345723472543745').send(`${message.author.username} a fait de la pub dans : ${message.channel} sont message a bien été suprimé`);
+
+      message.delete();
+
+      var buser = message.member.bannable
+
+      var bmotif = "Envoi des publicité"
+
+      var fs = require('fs');
+
+      fs.readFile('config.json', 'utf8', function (erreur, donnees){
+
+        var data = JSON.parse(donnees);
+        console.log(data.ban)
+
+        if(data.ban == true && buser){
+              console.log('ban')
+              bmotif = "envoie de la pub cette pute"
+              let = ban = new Discord.RichEmbed()
+
+                .setAuthor(message.member.nickname, message.author.avatarURL)
+
+                .setColor("#6f3da5")
+
+                .setTitle('BAN')
+                
+                .setDescription(`${message.member} a été bannis`)
+
+                .addField("Motif du ban", bmotif, true)
+
+                .setFooter("Administreation Ritara | " + date);
+
+                message.channel.send(`${buser} a bien été kick par ${message.member} !`);
+
+                bot.channels.get('305345723472543745').send(ban);
+
+                message.guild.member(buser).ban(bmotif)
+
+        }
+        else{
+              console.log("pas activer")
+        }
+          
+      });
+
+        
+
+                
+
+                //
+
+
+      console.log(buser)
     }
   }
 });
@@ -832,7 +965,7 @@ stream.on('tweet', function (tweet) {
   }else{
     console.log ('No Interest')
   }
-})
+});
 
 
 bot.login(process.env.BOT_TOKEN);

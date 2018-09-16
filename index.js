@@ -30,9 +30,31 @@ bot.on('ready', () => {
 bot.on('guildMemberAdd', member => {
 
   try {
+
+    var now = new Date()
+    var jour = now.getDate()
+    if(jour < 10){
+      var jour = "0" + jour
+    }
+    var mois = now.getMonth() + 1
+    if(mois < 10){
+      var mois = "0" + mois
+    }
+    var anee = now.getFullYear()
+
+    var hours = now.getHours() + 2
+    if(hours < 10){
+      var hours = "0" + hours
+    }
+    var min = now.getMinutes()
+    if(min < 10){
+      var min = "0" + min
+    }
+    var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
+
     var name = member.user.username;
 
-    console.log(name);
+    console.log(name + " " + date);
 
     //variable new role
 
@@ -40,8 +62,21 @@ bot.on('guildMemberAdd', member => {
 
     //message de bienvenue
 
-    bot.channels.get('489464956564013057').send(`Bienvenue sur Ritara, ${member}. Merci davoir rejoins. Bon jeu a toi !`);
+    let bvn = new Discord.RichEmbed()
 
+      .setTitle('Un nouveau membre a rejoins le serveur !')
+
+      .setDescription(`Bienvenue sur Ritara ${member}, Merci de nous avoir rejoins. Bon jeu a toi !`)
+
+      .setColor("#ae3fff")
+
+      .setThumbnail(member.user.avatarURL)
+
+      .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+
+      .setFooter("Merci d'être la ! Ritara | " + date);
+
+    bot.channels.get('469463455154438165').send(bvn);
     //ajout du role
 
     member.addRole(role);
@@ -76,11 +111,30 @@ bot.on('channelCreate', channel => {
 
   try {
 
+    var now = new Date()
+    var jour = now.getDate()
+    if(jour < 10){
+      var jour = "0" + jour
+    }
+    var mois = now.getMonth() + 1
+    if(mois < 10){
+      var mois = "0" + mois
+    }
+    var anee = now.getFullYear()
+
+    var hours = now.getHours() + 2
+    if(hours < 10){
+      var hours = "0" + hours
+    }
+    var min = now.getMinutes()
+    if(min < 10){
+      var min = "0" + min
+    }
+    var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
+
     bot.channels.get('469463455154438165').send(`salon cree  avec le nom ${channel} `);
 
     let botname = bot.user.username;
-
-    var sedate = channel.createdAt;
 
     let info = new Discord.RichEmbed()
 
@@ -100,9 +154,9 @@ bot.on('channelCreate', channel => {
 
       .setThumbnail("https://image.noelshack.com/fichiers/2018/29/3/1531929812-logio-ch.png")
 
-      .setAuthor(botname)
+      .setAuthor("Carlos Le BOT", bot.user.avatarURL)
 
-      .setFooter("Merci d'être la ! Ritara | " + sedate);
+      .setFooter("Merci d'être la ! Ritara | " + date);
 
     bot.channels.get('348070723904077827').send(info);
 
@@ -125,6 +179,7 @@ bot.on('channelCreate', channel => {
     bot.channels.get('469463455154438165').send(erreur);
   }
 });
+
 
 bot.on('message', message => {
 

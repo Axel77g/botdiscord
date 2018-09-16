@@ -76,7 +76,7 @@ bot.on('guildMemberAdd', member => {
 
       .setFooter("Merci d'être la ! Ritara | " + date);
 
-    bot.channels.get('469463455154438165').send(bvn);
+    bot.channels.get('489464956564013057').send(bvn);
     //ajout du role
 
     member.addRole(role);

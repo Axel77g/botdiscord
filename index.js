@@ -40,7 +40,7 @@ bot.on('guildMemberAdd', member => {
 
     //message de bienvenue
 
-    bot.channels.get('195917192800239626').send(`Bienvenue sur Ritara, ${member}. Merci davoir rejoins. Bon jeu a toi !`);
+    bot.channels.get('469463455154438165').send(`Bienvenue sur Ritara, ${member}. Merci davoir rejoins. Bon jeu a toi !`);
 
     //ajout du role
 

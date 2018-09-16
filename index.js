@@ -832,7 +832,7 @@ bot.on('message', message => {
     }
   }
 
-  if(message.channel.id === '195917192800239626' || message.channel.id === '469463455154438165'){
+  if(message.channel.id === '489464956564013057' || message.channel.id === '469463455154438165'){
 
     if(message.author.id != bot.user.id){
 

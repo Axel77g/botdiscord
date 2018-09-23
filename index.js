@@ -386,43 +386,80 @@ bot.on('message', message => {
 
     else if(splitmessage[0] === '!membre'){
 
-     
+      if(splitmessage[1]){
 
-      let userTarget = message.guild.member(message.mentions.users.first());
+        try {
 
-      console.log(userTarget)
-      console.log(userTarget.highestRole.color)
+          let userTarget = message.guild.member(message.mentions.users.first());
+  
+          console.log(userTarget)
+          console.log(userTarget.highestRole.color)
+  
+          var creadate = ""+ userTarget.user.createdAt;
+          
+          var joindate = ""+ userTarget.joinedAt;
+  
+          let mesinfo = new Discord.RichEmbed()
+  
+            .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+  
+            .setColor(userTarget.highestRole.color)
+  
+            .setTitle(`Toutes les informations de ${userTarget.displayName}`)
+  
+            .setDescription(`Tu voulais des infos sur ${userTarget.displayName}!`)
+  
+            .addField("Son pseudo actuel sur le serveur :", userTarget.displayName, false)
+  
+            .addField("Il a créé son compte le :", createDate(creadate), true)
+  
+            .addField("Il nous a rejoins le :", createDate(joindate), true)
+  
+            .addField("Son rôle est :", userTarget.highestRole, false)
+  
+            .addField("Il est :", userTarget.presence.status, false)
+  
+            .setThumbnail(userTarget.user.avatarURL)
+  
+            .setFooter("Merci d'être la ! Ritara | " + date);
+  
+          message.channel.send(mesinfo);
+  
+        }
+        catch(error) {
 
-      var creadate = ""+ userTarget.user.createdAt;
-      
-      var joindate = ""+ userTarget.joinedAt;
+          let erreur = new Discord.RichEmbed()
 
-      let mesinfo = new Discord.RichEmbed()
+          .setColor("#960d0d")
 
-        .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+          .setTitle('**ERREUR #201"**')
 
-        .setColor(userTarget.highestRole.color)
+          .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
 
-        .setTitle(`Toutes les informations de ${userTarget.displayName}`)
+          .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
-        .setDescription(`Tu voulais des infos sur ${userTarget.displayName}!`)
+          return message.channel.send(erreur);
 
-        .addField("Son pseudo actuel sur le serveur :", userTarget.displayName, false)
+          console.error(error);
+        }
 
-        .addField("Il a créé son compte le :", createDate(creadate), true)
+      }else {
 
-        .addField("Il nous a rejoins le :", createDate(joindate), true)
+        let erreur = new Discord.RichEmbed()
 
-        .addField("Son rôle est :", userTarget.highestRole, false)
+          .setColor("#960d0d")
 
-        .addField("Il est :", userTarget.presence.status, false)
+          .setTitle('**ERREUR #201"**')
 
-        .setThumbnail(userTarget.user.avatarURL)
+          .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
 
-        .setFooter("Merci d'être la ! Ritara | " + date);
+          .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
-      message.channel.send(mesinfo);
+        return message.channel.send(erreur);
 
+        console.log("error");
+
+      }
 
     }
 

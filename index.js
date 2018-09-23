@@ -245,7 +245,7 @@ bot.on('message', message => {
 
         .addBlankField(true)
 
-        .addField("Version actuel:", "v 0.03.")
+        .addField("Version actuel:", "v 1.01")
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532013009-help.png")
 
@@ -257,11 +257,14 @@ bot.on('message', message => {
 
     else if(splitmessage[0] === '!mesinfos'){
 
+      var creadate = ""+ message.member.user.createdAt;
+      var joindate = ""+ message.member.joinedAt;
+
       let mesinfo = new Discord.RichEmbed()
 
         .setAuthor("Carlos Le BOT", bot.user.avatarURL)
 
-        .setColor("#ae3fff")
+        .setColor(message.member.highestRole.color)
 
         .setTitle('Toutes tes informations')
 
@@ -269,9 +272,9 @@ bot.on('message', message => {
 
         .addField("Ton pseudo actuel sur le serveur :", message.member.displayName, false)
 
-        .addField("Tu as créé ton compte le :", message.member.user.createdAt, true)
+        .addField("Tu as créé ton compte le :", createDate(creadate), true)
 
-        .addField("Tu nous as rejoins le :", message.member.joinedAt, true)
+        .addField("Tu nous as rejoins le :", createDate(joindate), true)
 
         .addField("Ton rôle est :", message.member.highestRole, false)
 
@@ -287,7 +290,8 @@ bot.on('message', message => {
 
     else if(splitmessage[0] === '!info'){
 
-      var pseudo = splitmessage[1]
+      var creadate = ""+ message.guild.createdAt;
+      var joindate = ""+ message.member.joinedAt;
 
       let nbChannels = message.guild.channels.array().length;
 
@@ -307,11 +311,11 @@ bot.on('message', message => {
 
         .addField('Nom du serveur:', message.guild.name)
 
-        .addField('Nom du serveur:', message.guild.region)
+        .addField('Localisation:', message.guild.region)
 
-        .addField('Crée le:', message.guild.createdAt)
+        .addField('Crée le:', createDate(creadate), true)
 
-        .addField('Tu as rejoins le:', message.member.joinedAt)
+        .addField('Tu as rejoins le:', createDate(joindate), true)
 
         .addField('Total de membres:', message.guild.memberCount)
 
@@ -325,7 +329,7 @@ bot.on('message', message => {
 
         message.channel.send(info);
 
-        
+
       T.get("users/search", {q: 'Ritara_officiel'}, function(err, data, response) {
 
           console.log(data[0])
@@ -338,43 +342,50 @@ bot.on('message', message => {
           var url = "https://twitter.com/" + usernamet
 
           let tweeter = new Discord.RichEmbed()
-      
+
                 .setAuthor("Carlos Le BOT", bot.user.avatarURL)
-      
+
                 .setURL('https://twitter.com/Ritara_officiel')
-      
+
                 .setColor("#42c5f4")
-      
+
                 .setThumbnail(photoURL)
-      
+
                 .setTitle('Voici les Information de notre Twitter')
-      
+
                 .setDescription('Voici les informations concernant notre twitter n\'hésitez pas allez le follow')
-      
+
                 .addField("Notre Mention","["+usernamet+"]("+ url +")")
-      
+
                 .addField("Follower", ":bird: " +follower, true)
-      
+
                 .addField("Like", ':heart: ' + favori, true)
-      
+
                 .setFooter("Merci d'être la ! Ritara | " + date, 'https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png');
-    
-                message.channel.send(tweeter);  
-     
+
+                message.channel.send(tweeter);
+
       });
     }
 
     else if(splitmessage[0] === '!membre'){
 
+     
+
       let userTarget = message.guild.member(message.mentions.users.first());
 
       console.log(userTarget)
+      console.log(userTarget.highestRole.color)
+
+      var creadate = ""+ userTarget.user.createdAt;
+      
+      var joindate = ""+ userTarget.joinedAt;
 
       let mesinfo = new Discord.RichEmbed()
 
         .setAuthor("Carlos Le BOT", bot.user.avatarURL)
 
-        .setColor("#ae3fff")
+        .setColor(userTarget.highestRole.color)
 
         .setTitle(`Toutes les informations de ${userTarget.displayName}`)
 
@@ -382,9 +393,9 @@ bot.on('message', message => {
 
         .addField("Son pseudo actuel sur le serveur :", userTarget.displayName, false)
 
-        .addField("Il a créé son compte le :", userTarget.user.createdAt, true)
+        .addField("Il a créé son compte le :", createDate(creadate), true)
 
-        .addField("Il nous a rejoins le :", userTarget.joinedAt, true)
+        .addField("Il nous a rejoins le :", createDate(joindate), true)
 
         .addField("Son rôle est :", userTarget.highestRole, false)
 

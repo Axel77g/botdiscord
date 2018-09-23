@@ -1,3 +1,18 @@
+var resultdate = ""
+
+function createDate(dateachange){
+
+var splitdata = dateachange.split(" ");
+var day = splitdata[2];
+var month = splitdata[1];
+var years = splitdata[3];
+var dataheure = splitdata[4].split(":")
+console.log(dataheure[0]);
+console.log(dataheure[1])
+resultdate = day + " " + month + " " + years + " à " + dataheure[0] + "h" + dataheure[1]
+return resultdate
+}
+
 const Discord = require('discord.js');
 
 var bot = new Discord.Client();

@@ -1,3 +1,4 @@
+//L'utilisation de ce code est interdite sans accord.
 var resultdate = ""
 
 function createDate(dateachange){

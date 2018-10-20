@@ -998,7 +998,7 @@ bot.on('message', message => {
                 .setColor("#6f3da5")
 
                 .setTitle('BAN')
-                
+
                 .setDescription(`${message.member} a été bannis`)
 
                 .addField("Motif du ban", bmotif, true)
@@ -1015,19 +1015,81 @@ bot.on('message', message => {
         else{
               console.log("pas activer")
         }
-          
+
       });
 
-        
-
-                
-
-                //
-
-
       console.log(buser)
+      
     }
+    
   }
+
+    function GetSecondeMessage(){
+
+        var char = ""+message.createdAt
+
+        var splitchar = char.split(' ')
+
+        var heure = splitchar[4]
+
+        var splitheure = heure.split(':')
+
+        var seconde = splitheure[2]
+
+        return seconde
+    }
+    
+    var fs = require('fs');
+    var oldSeconde =  parseInt(fs.readFileSync("messageTime.txt", "UTF-8"));
+
+    var seconde = parseInt(GetSecondeMessage())
+
+    fs.writeFile('messageTime.txt', seconde)
+
+    console.log("new: "+ seconde)
+
+    console.log("old: "+ oldSeconde)
+
+    var oldUser = fs.readFileSync("authorID.txt", "UTF-8");
+
+    var user = message.author.id
+
+    fs.writeFile('authorID.txt', user)
+
+    console.log("new: "+ user)
+
+    console.log("old: "+ oldUser)
+
+    var interval = 5
+
+    if(seconde <= oldSeconde){
+
+      var diference = oldSeconde - seconde
+
+    }else{
+
+      var diference = seconde - oldSeconde
+
+    }  
+
+    console.log(interval)
+
+    console.log(diference)
+
+    if(oldUser === user && message.author.id != bot.user.id){
+
+      console.log('same')
+
+      if (diference <= interval){
+
+        message.delete()
+
+        message.channel.send(`${message.member} Ca va trop vite calme toi s'il te plait !! :hugging:`)
+
+      }
+
+    }
+
 });
 
 var stream = T.stream('statuses/filter', {track: 'Ritara'})

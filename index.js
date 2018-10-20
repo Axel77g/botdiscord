@@ -1060,7 +1060,7 @@ bot.on('message', message => {
 
     console.log("old: "+ oldUser)
 
-    var interval = 5
+    var interval =2
 
     if(seconde <= oldSeconde){
 

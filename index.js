@@ -910,6 +910,100 @@ bot.on('message', message => {
 
       }
     }
+
+    else if(splitmessage[0] === '!invite'){
+
+      var options = {
+        temporary: false,
+        revoked: true
+      };
+      message.channel.createInvite(options)
+      .then(invite => message.channel.send(`Votre lien d'invitation : \n\nhttps://discord.gg/${invite.code}`))
+  
+    }
+
+    else if(splitmessage[0] === "!clean"){
+
+      message.delete()
+
+          if (splitmessage.length === 3) {
+
+          var query = message.guild.member(message.mentions.users.first());
+
+          var limit = parseInt(splitmessage[2])
+
+          function supmsg(data){
+
+          listemsg = data.array()
+
+          console.log(listemsg)
+
+          var i = 0
+
+          while(i < listemsg.length){
+              
+            if(listemsg[i].author.id === query.user.id)
+
+              listemsg[i].delete()
+
+              i++
+
+              console.log(i)
+
+              if(i === listemsg.length){
+
+                console.log('clean')
+        
+              }
+
+            }   
+
+          }
+
+          if(limit != NaN && limit <= 100 && limit > 0){
+
+            console.log(message.channel.fetchMessages({ limit: limit}).then(msg => supmsg(msg)).catch(function(error){
+              console.log(error)
+            }));
+
+          }
+          else{
+
+            console.log("error");
+            let erreur = new Discord.RichEmbed()
+
+            .setColor("#960d0d")
+
+            .setTitle('**ERREUR #2001"**')
+
+            .addField("Il semblerait que Carlos rencontre un problème !", "Vous Imposible de suprimer les messages")
+
+            .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+          return message.channel.send(erreur);
+
+          
+          }
+
+        }
+        else {
+
+          let erreur = new Discord.RichEmbed()
+
+            .setColor("#960d0d")
+
+            .setTitle('**ERREUR #201"**')
+
+            .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
+
+            .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+          return message.channel.send(erreur);
+
+          console.log("error");
+
+        }
+  }
     // erreur commande inconue
     else {
 
@@ -1019,60 +1113,82 @@ bot.on('message', message => {
       });
 
       console.log(buser)
-      
     }
-    
   }
 
     function GetSecondeMessage(){
-
         var char = ""+message.createdAt
-
         var splitchar = char.split(' ')
-
         var heure = splitchar[4]
-
         var splitheure = heure.split(':')
-
         var seconde = splitheure[2]
-
         return seconde
     }
     
-        var fs = require('fs');
+   /* var fs = require('fs');
+    var oldSeconde =  parseInt(fs.readFileSync("messageTime.txt", "UTF-8"));
+    var seconde = parseInt(GetSecondeMessage())
+    fs.writeFile('messageTime.txt', seconde)
+    console.log("new: "+ seconde)
+    console.log("old: "+ oldSeconde)
+    var oldUser = fs.readFileSync("authorID.txt", "UTF-8");
+    var user = message.author.id
+    fs.writeFile('authorID.txt', user)
+    console.log("new: "+ user)
+    console.log("old: "+ oldUser)
+    var interval = 5
+    if(seconde <= oldSeconde){
+      var diference = oldSeconde - seconde
+    }else{
+      var diference = seconde - oldSeconde
+    }  
+    console.log(interval)
+    console.log(diference)
+
+    if(oldUser === user && message.author.id != bot.user.id){
+
+      console.log('same')
+
+      if (diference <= interval){
+        message.delete()
+        message.channel.send(`${message.member} Ca va trop vite calme toi s'il te plait !! :hugging:`)
+      }
+
+    }*/
+
+    var fs = require('fs');
     var usertree = parseInt(fs.readFileSync("usertree.txt", "UTF-8", function(){}));
     var usertwo = parseInt(fs.readFileSync("usertwo.txt", "UTF-8", function(){}));
-    var userone = message.author.id;
-    fs.writeFile('usertwo.txt', userone, function(){});
-    fs.writeFile('usertree.txt', usertwo, function(){});
+    var userone = message.author.id
+    fs.writeFile('usertwo.txt', userone, function(){})
+    fs.writeFile('usertree.txt', usertwo, function(){})
 
     var secmsg3 = parseInt(fs.readFileSync("secmsg3.txt", "UTF-8"));
     var secmsg2 =parseInt(fs.readFileSync("secmsg2.txt", "UTF-8"));
     var secmsg = parseInt(GetSecondeMessage());
-    fs.writeFile('secmsg3.txt', secmsg2, function(){});
-    fs.writeFile('secmsg2.txt', secmsg, function(){});
+    fs.writeFile('secmsg3.txt', secmsg2, function(){})
+    fs.writeFile('secmsg2.txt', secmsg, function(){})
 
     var interval = 2
     if(secmsg <= secmsg2){
-      var delay = secmsg2 - secmsg;
+      var delay = secmsg2 - secmsg
     }else{
-      var delay = secmsg - secmsg2;
+      var delay = secmsg - secmsg2
     }  
 
 
     if(userone == usertwo && usertwo == usertree && message.author.id != bot.user.id){
       
       if (delay <= interval){
-        
-        message.delete();
-        message.channel.send(`${message.member} Ca va trop vite calme toi s'il te plait !! :hugging:`);
-        message.member.addRole(message.member.guild.roles.find('name', 'SPAM'));
-        
+        message.delete()
+        message.channel.send(`${message.member} Ca va trop vite calme toi s'il te plait !! :hugging:`)
+        message.member.addRole(message.member.guild.roles.find('name', 'SPAM'))
       }
 
     }
-
+    
 });
+
 
 var stream = T.stream('statuses/filter', {track: 'Ritara'})
  

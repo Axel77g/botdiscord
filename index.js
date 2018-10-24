@@ -1,4 +1,4 @@
-/*//L'utilisation de ce code est interdite sans accord.
+//L'utilisation de ce code est interdite sans accord.
 var resultdate = ""
 
 function createDate(dateachange){
@@ -1039,53 +1039,35 @@ bot.on('message', message => {
         return seconde
     }
     
-    var fs = require('fs');
-    var oldSeconde =  parseInt(fs.readFileSync("messageTime.txt", "UTF-8"));
+        var fs = require('fs');
+    var usertree = parseInt(fs.readFileSync("usertree.txt", "UTF-8", function(){}));
+    var usertwo = parseInt(fs.readFileSync("usertwo.txt", "UTF-8", function(){}));
+    var userone = message.author.id;
+    fs.writeFile('usertwo.txt', userone, function(){});
+    fs.writeFile('usertree.txt', usertwo, function(){});
 
-    var seconde = parseInt(GetSecondeMessage())
+    var secmsg3 = parseInt(fs.readFileSync("secmsg3.txt", "UTF-8"));
+    var secmsg2 =parseInt(fs.readFileSync("secmsg2.txt", "UTF-8"));
+    var secmsg = parseInt(GetSecondeMessage());
+    fs.writeFile('secmsg3.txt', secmsg2, function(){});
+    fs.writeFile('secmsg2.txt', secmsg, function(){});
 
-    fs.writeFile('messageTime.txt', seconde)
-
-    console.log("new: "+ seconde)
-
-    console.log("old: "+ oldSeconde)
-
-    var oldUser = fs.readFileSync("authorID.txt", "UTF-8");
-
-    var user = message.author.id
-
-    fs.writeFile('authorID.txt', user)
-
-    console.log("new: "+ user)
-
-    console.log("old: "+ oldUser)
-
-    var interval =2
-
-    if(seconde <= oldSeconde){
-
-      var diference = oldSeconde - seconde
-
+    var interval = 2
+    if(secmsg <= secmsg2){
+      var delay = secmsg2 - secmsg;
     }else{
-
-      var diference = seconde - oldSeconde
-
+      var delay = secmsg - secmsg2;
     }  
 
-    console.log(interval)
 
-    console.log(diference)
-
-    if(oldUser === user && message.author.id != bot.user.id){
-
-      console.log('same')
-
-      if (diference <= interval){
-
-        message.delete()
-
-        message.channel.send(`${message.member} Ca va trop vite calme toi s'il te plait !! :hugging:`)
-
+    if(userone == usertwo && usertwo == usertree && message.author.id != bot.user.id){
+      
+      if (delay <= interval){
+        
+        message.delete();
+        message.channel.send(`${message.member} Ca va trop vite calme toi s'il te plait !! :hugging:`);
+        message.member.addRole(message.member.guild.roles.find('name', 'SPAM'));
+        
       }
 
     }

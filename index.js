@@ -1141,72 +1141,111 @@ bot.on('message', message => {
   }
 
     function GetSecondeMessage(){
+
         var char = ""+message.createdAt
+
         var splitchar = char.split(' ')
+
         var heure = splitchar[4]
+
         var splitheure = heure.split(':')
+
         var seconde = splitheure[2]
+
         return seconde
+
     }
     
-   /* var fs = require('fs');
-    var oldSeconde =  parseInt(fs.readFileSync("messageTime.txt", "UTF-8"));
-    var seconde = parseInt(GetSecondeMessage())
-    fs.writeFile('messageTime.txt', seconde)
-    console.log("new: "+ seconde)
-    console.log("old: "+ oldSeconde)
-    var oldUser = fs.readFileSync("authorID.txt", "UTF-8");
-    var user = message.author.id
-    fs.writeFile('authorID.txt', user)
-    console.log("new: "+ user)
-    console.log("old: "+ oldUser)
-    var interval = 5
-    if(seconde <= oldSeconde){
-      var diference = oldSeconde - seconde
-    }else{
-      var diference = seconde - oldSeconde
-    }  
-    console.log(interval)
-    console.log(diference)
-
-    if(oldUser === user && message.author.id != bot.user.id){
-
-      console.log('same')
-
-      if (diference <= interval){
-        message.delete()
-        message.channel.send(`${message.member} Ca va trop vite calme toi s'il te plait !! :hugging:`)
-      }
-
-    }*/
 
     var fs = require('fs');
-    var usertree = parseInt(fs.readFileSync("usertree.txt", "UTF-8", function(){}));
-    var usertwo = parseInt(fs.readFileSync("usertwo.txt", "UTF-8", function(){}));
-    var userone = message.author.id
-    fs.writeFile('usertwo.txt', userone, function(){})
-    fs.writeFile('usertree.txt', usertwo, function(){})
 
+    var usertree = parseInt(fs.readFileSync("usertree.txt", "UTF-8", function(){}));
+
+    var usertwo = parseInt(fs.readFileSync("usertwo.txt", "UTF-8", function(){}));
+
+    var userone = message.author.id
+
+    fs.writeFile('usertwo.txt', userone, function(){})
+
+    fs.writeFile('usertree.txt', usertwo, function(){})
+    
     var secmsg3 = parseInt(fs.readFileSync("secmsg3.txt", "UTF-8"));
+
     var secmsg2 =parseInt(fs.readFileSync("secmsg2.txt", "UTF-8"));
+
     var secmsg = parseInt(GetSecondeMessage());
+
     fs.writeFile('secmsg3.txt', secmsg2, function(){})
+
     fs.writeFile('secmsg2.txt', secmsg, function(){})
 
+
     var interval = 2
+
     if(secmsg <= secmsg2){
+
       var delay = secmsg2 - secmsg
+
     }else{
+
       var delay = secmsg - secmsg2
+      
     }  
 
 
     if(userone == usertwo && usertwo == usertree && message.author.id != bot.user.id){
       
       if (delay <= interval){
+
         message.delete()
+
         message.channel.send(`${message.member} Ca va trop vite calme toi s'il te plait !! :hugging:`)
-        message.member.addRole(message.member.guild.roles.find('name', 'SPAM'))
+
+        message.member.addRole(message.member.guild.roles.find('name', 'SPAM')) 
+
+        var time = 0
+          
+        var myinterval = setInterval(function(){
+
+          time = time + 1 // seconde
+          console.log(time)
+
+          if(time === 10000){
+
+            function findit(role){
+
+              return role.id === '504623083819237396'
+
+            }
+            var table = bot.guilds.array() //chercher la guild
+
+            console.log(table)
+
+            var member = table[0].members.array()//tableau membres de ritara
+
+            console.log(member)
+
+            var i = 0
+
+            while(i < member.length){
+
+              var memberRoles = member[i].roles.array()
+
+              if(memberRoles.find(findit)){
+
+                console.log(member[i].user.username)
+
+                member[i].removeRole('504623083819237396')
+
+              }
+
+              i++
+
+            }
+
+            clearInterval(myinterval)
+          }
+        }, 1000)  
       }
 
     }
@@ -1269,6 +1308,27 @@ stream.on('tweet', function (tweet) {
     console.log ('No Interest')
   }
 });
+
+var acti = 0
+
+setInterval(function(){
+
+  if (acti === 1){
+    
+   // bot.channels.get('469463455154438165').send('pute')
+    bot.user.setActivity('!info')
+    acti = 0
+  }
+  else if (acti === 0){
+   // bot.channels.get('469463455154438165').send('salope')
+    bot.user.setActivity('!help')
+    acti = 1
+  }
+  
+}
+, 30000 );
+
+
 
 
 bot.login(process.env.BOT_TOKEN);

@@ -913,12 +913,36 @@ bot.on('message', message => {
 
     else if(splitmessage[0] === '!invite'){
 
-      var options = {
-        temporary: false,
-        revoked: true
-      };
-      message.channel.createInvite(options)
-      .then(invite => message.channel.send(`Votre lien d'invitation : \n\nhttps://discord.gg/${invite.code}`))
+      if(message.member.hasPermission("ADMINISTRATOR")){
+        
+      function create(data){
+        message.channel.send(`L'invitation a été crée avec le lien : ${data.url} et d'une durée ilimité`)
+      }
+
+      console.log(bot.channels.get('308175058197544961').createInvite({maxAge : 0}).then(invitation => create(invitation)    
+      ));
+
+      }
+      else{
+
+        let erreur = new Discord.RichEmbed()
+
+            .setColor("#960d0d")
+
+            .setTitle('**ERREUR #101**')
+
+            .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas les permisions !")
+
+            .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+            console.log("error");
+
+            return message.channel.send(erreur);
+
+            
+
+      }
+      
   
     }
 

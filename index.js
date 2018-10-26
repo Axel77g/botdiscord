@@ -1425,6 +1425,39 @@ setInterval(function(){
 }
 , 30000 );
 
+function log(data){
 
+  var now = new Date()
+      var jour = now.getDate()
+      if(jour < 10){
+        var jour = "0" + jour
+      }
+      var mois = now.getMonth() + 1
+      if(mois < 10){
+        var mois = "0" + mois
+      }
+      var anee = now.getFullYear()
+
+      var hours = now.getHours() + 2
+      if(hours < 10){
+        var hours = "0" + hours
+      }
+      var min = now.getMinutes()
+      if(min < 10){
+        var min = "0" + min
+      }
+      var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
+
+      var text = '\n        ////       ' + data + '(' + date + ')';
+
+      const fs = require('fs');
+
+      fs.appendFile('logsbot.txt', text , (error)=>{
+
+        if(error) console.log(error)
+
+      })
+
+}
 
 bot.login(process.env.BOT_TOKEN);

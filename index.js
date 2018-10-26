@@ -3,15 +3,16 @@ var resultdate = ""
 
 function createDate(dateachange){
 
-var splitdata = dateachange.split(" ");
-var day = splitdata[2];
-var month = splitdata[1];
-var years = splitdata[3];
-var dataheure = splitdata[4].split(":")
-console.log(dataheure[0]);
-console.log(dataheure[1])
-resultdate = day + " " + month + " " + years + " à " + dataheure[0] + "h" + dataheure[1]
-return resultdate
+  var splitdata = dateachange.split(" ");
+  var day = splitdata[2];
+  var month = splitdata[1];
+  var years = splitdata[3];
+  var dataheure = splitdata[4].split(":")
+  console.log(dataheure[0]);
+  console.log(dataheure[1])
+  resultdate = day + " " + month + " " + years + " à " + dataheure[0] + "h" + dataheure[1]
+  return resultdate
+
 }
 
 const Discord = require('discord.js');
@@ -21,11 +22,14 @@ var bot = new Discord.Client();
 var Twit = require('twit')
 
 var T = new Twit({
-  consumer_key:         process.env.consumer_key,
-  consumer_secret:      process.env.consumer_secret,
-  access_token:         process.env.access_token,
-  access_token_secret:  process.env.access_token_secret,
+  consumer_key:         'TZNKcEBfebspH8uFkHkFizKvQ',
+  consumer_secret:      'QretEAbd8kxtzk9iPnXLlWlSP3PLlODNtoued3Vk9NiUeVf4VT',
+  access_token:         '899043174924132352-9bEMrz6JeNIRGMbmF4tmH7eRzdJzVNI',
+  access_token_secret:  '4hBdm8qzcssP2a5pHXjV9Kl3lkXlULESmhgDna2OiiXNf',
 });
+
+
+
 
 const PREFIX = "!";
 
@@ -34,11 +38,16 @@ bot.on('ready', () => {
 
   bot.user.setActivity('!info');
 
-  bot.channels.get('469463455154438165').send(`Je suis connecté ! :grin:`);
+  bot.channels.get('469463455154438165').send(`Je suis connecté #ON ! :grin:`);
 
   console.log(bot.user)
 
+  log('Conneté')
+
+
 });
+
+bot.login('NDY5MDc3MTc1ODkxMzk0NTYx.DjCd0w.hHsgGQtSg6MKZ2sod6rVsdpTA6Y');
 
 
 //evenement Nouveau membre
@@ -97,6 +106,8 @@ bot.on('guildMemberAdd', member => {
 
     member.addRole(role);
 
+    log('Nouveau Membre + ajout de role effectué avec succes')
+
 
   } catch (error) {
 
@@ -115,6 +126,8 @@ bot.on('guildMemberAdd', member => {
       .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
     bot.channels.get('469463455154438165').send(erreur);
+
+    log('Erreur #500')
 
   }
 
@@ -178,6 +191,8 @@ bot.on('channelCreate', channel => {
 
     console.log(good);
 
+    log(`Channel crée : ${channel}`)
+
   } catch (error) {
 
     console.error(error);
@@ -193,9 +208,10 @@ bot.on('channelCreate', channel => {
       .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
     bot.channels.get('469463455154438165').send(erreur);
+
+    log(`Erreur #501`)
   }
 });
-
 
 bot.on('message', message => {
 
@@ -226,6 +242,7 @@ bot.on('message', message => {
       var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
     // verif !
   if(message.content[0] === PREFIX){
+    
     //split message
     let splitmessage = message.content.split(" / ");
     //command !help
@@ -269,6 +286,8 @@ bot.on('message', message => {
 
       message.channel.send(help);
 
+      log(`command : ${message.content}`)
+
     }
 
     else if(splitmessage[0] === '!mesinfos'){
@@ -301,6 +320,8 @@ bot.on('message', message => {
         .setFooter("Merci d'être la ! Ritara | " + date);
 
       message.channel.send(mesinfo);
+
+      log(`command : ${message.content}`)
 
     }
 
@@ -345,6 +366,8 @@ bot.on('message', message => {
 
         message.channel.send(info);
 
+        
+
 
       T.get("users/search", {q: 'Ritara_officiel'}, function(err, data, response) {
 
@@ -380,6 +403,8 @@ bot.on('message', message => {
                 .setFooter("Merci d'être la ! Ritara | " + date, 'https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png');
 
                 message.channel.send(tweeter);
+
+                log(`command : ${message.content}`)
 
       });
     }
@@ -424,6 +449,9 @@ bot.on('message', message => {
             .setFooter("Merci d'être la ! Ritara | " + date);
   
           message.channel.send(mesinfo);
+
+
+          log(`command : ${message.content}`)
   
         }
         catch(error) {
@@ -437,6 +465,8 @@ bot.on('message', message => {
           .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
 
           .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+          log(`Erreur : #201`)
 
           return message.channel.send(erreur);
 
@@ -455,9 +485,13 @@ bot.on('message', message => {
 
           .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
+          console.log("error");
+
+        log(`Erreur : #201`)
+
         return message.channel.send(erreur);
 
-        console.log("error");
+        
 
       }
 
@@ -484,17 +518,23 @@ bot.on('message', message => {
         .setFooter("Merci d'être la ! Ritara | " + date);
 
       bot.channels.get('485184306709266436').send(twitter);
+
+      log(`command : ${message.content}`)
     }
 
     //tiket report
     else if (splitmessage[0] === "!report") {
-
+      
       //on teste la taille du split
 
       if (splitmessage.length === 3) {
 
+        
         var motif = splitmessage[1];
+
         mention = message.mentions.users.first();
+
+        
 
         if (mention == null) {
           return
@@ -517,6 +557,8 @@ bot.on('message', message => {
 
           bot.channels.get('305345723472543745').send(report);
 
+          log(`command : ${message.content} avec la mention : ${mention} fait par ${message.author.username}`)
+
 
         }
 
@@ -533,6 +575,8 @@ bot.on('message', message => {
           .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
 
           .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+          log(`erreur : #201`)
 
         return message.channel.send(erreur);
 
@@ -552,6 +596,8 @@ bot.on('message', message => {
 
         bot.channels.get(channel).send(msg);
 
+        log(`command: ${message.content}`)
+
       } else {
 
         let erreur = new Discord.RichEmbed()
@@ -563,6 +609,9 @@ bot.on('message', message => {
           .addField("Il s'emblerait que Carlos rencontre un problème !", "Vous n'avez pas specifié assez de paramètres, Tips : n'oublier pas de séparer vos paramètres avec : **\'  /  \'** ")
 
           .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+
+          log(`erreur : #201`)
 
         return message.channel.send(erreur);
 
@@ -590,9 +639,13 @@ bot.on('message', message => {
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
+        console.log("error");
+
+        log("error : #102");
+
         return message.channel.send(erreur);
 
-        console.log("error");
+        
 
         }
         else{
@@ -609,6 +662,8 @@ bot.on('message', message => {
             .addField("Il semblerait que Carlos rencontre un problème !", "Vous n'avez pas les permisions !")
 
             .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+            log("error : #102");
 
             return message.channel.send(erreur);
 
@@ -631,6 +686,8 @@ bot.on('message', message => {
               .addField("Il semblerait que Carlos rencontre un problème !", "Imposible de kick cette personne !")
 
               .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+
+              log("error : #103");
 
               return message.channel.send(erreur);
 
@@ -662,6 +719,8 @@ bot.on('message', message => {
 
             message.guild.member(kuser).kick(kmotif)
 
+            log(`command :  ${message.content}`);
+
             }
 
           }
@@ -681,9 +740,9 @@ bot.on('message', message => {
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
-        return message.channel.send(erreur);
+        log(`erreur : #201`)
 
-        console.log("error");
+        return message.channel.send(erreur);
 
       }
     }
@@ -777,6 +836,8 @@ bot.on('message', message => {
 
                 message.guild.member(buser).ban(bmotif)
 
+                log(`command : ${message.content} , ${buser.user.username} bannis par ${message.author.username}`)
+
             }
 
           }
@@ -796,9 +857,12 @@ bot.on('message', message => {
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
+        log(`erreur : #201`)
+
       return message.channel.send(erreur);
 
       console.log("error");
+      
 
       }
     }
@@ -861,8 +925,6 @@ bot.on('message', message => {
           fs.writeFileSync('config.json', '{  "'+param+'" : '+value+' }', 'UTF-8');
 
           console.log('Update Configuration');
-
-          fs.writeFileSync('log.txt', "Update Configuration : "+ date+ "\n", 'UTF-8', {'flags': 'a+'});
 
           message.channel.send('La Configuration a été mise a jour avec succes')
 
@@ -1027,6 +1089,41 @@ bot.on('message', message => {
           console.log("error");
 
         }
+  }
+  else if(splitmessage[0] === '!left'){
+    if(message.member.voiceChannel){
+    message.member.voiceChannel.leave()
+    }
+  }
+  else if(splitmessage[0] === '!play'){
+
+    if(splitmessage.length === 3){
+
+      var link = splitmessage[1]
+
+      var popo = parseInt(splitmessage[2])/ 100
+
+      const ytdl = require('ytdl-core');
+
+      const streamOptions = { seek: 0, volume: popo };
+
+      if(message.member.voiceChannel){
+
+        message.member.voiceChannel.join()
+
+        .then(connection => {
+
+          const stream = ytdl(link, { filter : 'audioonly', quality: 'highestaudio'});
+
+          const dispatcher = connection.playStream(stream, streamOptions);
+
+        })
+        .catch(console.error);
+        }
+     
+
+    }
+
   }
     // erreur commande inconue
     else {
@@ -1210,7 +1307,7 @@ bot.on('message', message => {
           time = time + 1 // seconde
           console.log(time)
 
-          if(time === 3600){
+          if(time === 10000){
 
             function findit(role){
 
@@ -1252,9 +1349,8 @@ bot.on('message', message => {
     
 });
 
-
 var stream = T.stream('statuses/filter', {track: 'Ritara'})
- 
+
 var now = new Date()
       var jour = now.getDate()
       if(jour < 10){
@@ -1307,7 +1403,10 @@ stream.on('tweet', function (tweet) {
   }else{
     console.log ('No Interest')
   }
+
+
 });
+
 
 var acti = 0
 
@@ -1327,7 +1426,6 @@ setInterval(function(){
   
 }
 , 30000 );
-
 
 
 

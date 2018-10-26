@@ -99,7 +99,7 @@ bot.on('guildMemberAdd', member => {
 
       .setFooter("Merci d'être la ! Ritara | " + date);
 
-    bot.channels.get('489464956564013057').send(bvn);
+    bot.channels.get('505506374302564372').send(bvn);
     //ajout du role
 
     member.addRole(role);
@@ -123,7 +123,7 @@ bot.on('guildMemberAdd', member => {
 
       .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
-    bot.channels.get('469463455154438165').send(erreur);
+    bot.channels.get('505506374302564372').send(erreur);
 
     log('Erreur #500')
 
@@ -159,7 +159,7 @@ bot.on('channelCreate', channel => {
     }
     var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
 
-    bot.channels.get('469463455154438165').send(`salon cree  avec le nom ${channel} `);
+    bot.channels.get('505503616308740096').send(`salon cree  avec le nom ${channel} `);
 
     let botname = bot.user.username;
 
@@ -185,7 +185,7 @@ bot.on('channelCreate', channel => {
 
       .setFooter("Merci d'être la ! Ritara | " + date);
 
-    bot.channels.get('348070723904077827').send(info);
+    bot.channels.get('505506509992624128').send(info);
 
     console.log(good);
 
@@ -205,7 +205,7 @@ bot.on('channelCreate', channel => {
 
       .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
-    bot.channels.get('469463455154438165').send(erreur);
+    bot.channels.get('505503616308740096').send(erreur);
 
     log(`Erreur #501`)
   }

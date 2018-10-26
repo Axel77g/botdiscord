@@ -38,7 +38,7 @@ bot.on('ready', () => {
 
   bot.user.setActivity('!info');
 
-  bot.channels.get('469463455154438165').send(`Je suis connecté #ON ! :grin:`);
+  bot.channels.get('505503616308740096').send(`Je suis connecté #ON ! :grin:`);
 
   console.log(bot.user)
 

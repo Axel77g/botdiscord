@@ -47,7 +47,7 @@ bot.on('ready', () => {
 
 });
 
-/*
+
 //evenement Nouveau membre
 
 bot.on('guildMemberAdd', member => {
@@ -1426,5 +1426,5 @@ setInterval(function(){
 , 30000 );
 
 
-*/
+
 bot.login(process.env.BOT_TOKEN);

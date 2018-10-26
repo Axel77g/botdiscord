@@ -497,7 +497,7 @@ bot.on('message', message => {
 
     else if (splitmessage[0] === "!twitter") {
 
-      bot.channels.get('469463455154438165').send(`Commande effectué ` + message + ` par ${message.member} dans ${message.channel} `);
+      bot.channels.get('505507727267856385').send(`Commande effectué ` + message + ` par ${message.member} dans ${message.channel} `);
 
       let twitter = new Discord.RichEmbed()
 
@@ -713,7 +713,7 @@ bot.on('message', message => {
 
             message.channel.send(`${kuser} a bien été kick par ${message.member} !`);
 
-            bot.channels.get('305345723472543745').send(kick);
+            bot.channels.get('505507727267856385').send(kick);
 
             message.guild.member(kuser).kick(kmotif)
 
@@ -830,7 +830,7 @@ bot.on('message', message => {
 
                 message.channel.send(`${buser} a bien été kick par ${message.member} !`);
 
-                bot.channels.get('305345723472543745').send(ban);
+                bot.channels.get('505507727267856385').send(ban);
 
                 message.guild.member(buser).ban(bmotif)
 
@@ -899,7 +899,7 @@ bot.on('message', message => {
 
           .addField("Allez Follow Notre Twitter pour ne rien manquer", '[@Ritara_officiel](https://twitter.com/Ritara_officiel) ');
 
-          bot.channels.get('485184306709266436').send(newtweet);
+          bot.channels.get('505506509992624128').send(newtweet);
 
         });
       }
@@ -979,7 +979,7 @@ bot.on('message', message => {
         message.channel.send(`L'invitation a été crée avec le lien : ${data.url} et d'une durée ilimité`)
       }
 
-      console.log(bot.channels.get('308175058197544961').createInvite({maxAge : 0}).then(invitation => create(invitation)    
+      console.log(bot.channels.get('505509406578966541').createInvite({maxAge : 0}).then(invitation => create(invitation)    
       ));
 
       }
@@ -1144,7 +1144,7 @@ bot.on('message', message => {
 
   var role = message.member.highestRole
 
-  if (message.channel.id === '348071630309949440' && message.author.id != bot.user.id) {
+  if (message.channel.id === '505509919055937558' && message.author.id != bot.user.id) {
 
     console.log(role.name)
 
@@ -1158,13 +1158,13 @@ bot.on('message', message => {
 
           message.channel.send(`${message.member} Ta demande va etre prise en compte !`);
 
-          bot.channels.get('305345723472543745').send(`${message.member} A deposer un message dans le salon ${message.channel} !`);
+          bot.channels.get('505507727267856385').send(`${message.member} A deposer un message dans le salon ${message.channel} !`);
         }
       }
     }
   }
 
-  if(message.channel.id === '489464956564013057' || message.channel.id === '469463455154438165'){
+  if(message.channel.id === '505507727267856385' || message.channel.id === '505503616308740096'){
 
     if(message.author.id != bot.user.id){
 
@@ -1173,7 +1173,7 @@ bot.on('message', message => {
       if(message.content.match(expresion)){
 
         message.channel.send(`${message.member} S'il vous plait surveillez votre language ! :open_mouth: `)
-        bot.channels.get('305345723472543745').send(`${message.author.username} a utilisé un mot répertorié, dans le salon : ${message.channel} sont message a bien été suprimé`);
+        bot.channels.get('505507727267856385').send(`${message.author.username} a utilisé un mot répertorié, dans le salon : ${message.channel} sont message a bien été suprimé`);
         message.delete();
 
       }
@@ -1186,7 +1186,7 @@ bot.on('message', message => {
 
       message.channel.send(`${message.member} Il est interdit d'envoyer des publicités concernant d'autre serveur discord !! :kissing_closed_eyes:`);
 
-      bot.channels.get('305345723472543745').send(`${message.author.username} a fait de la pub dans : ${message.channel} sont message a bien été suprimé`);
+      bot.channels.get('505507727267856385').send(`${message.author.username} a fait de la pub dans : ${message.channel} sont message a bien été suprimé`);
 
       message.delete();
 
@@ -1220,7 +1220,7 @@ bot.on('message', message => {
 
                 message.channel.send(`${buser} a bien été kick par ${message.member} !`);
 
-                bot.channels.get('305345723472543745').send(ban);
+                bot.channels.get('505507727267856385').send(ban);
 
                 message.guild.member(buser).ban(bmotif)
 
@@ -1396,7 +1396,7 @@ stream.on('tweet', function (tweet) {
 
     .addField("Allez Follow Notre Twitter pour ne rien manquer", '[@Ritara_officiel](https://twitter.com/Ritara_officiel) ');
 
-    bot.channels.get('485184306709266436').send(newtweet)
+    bot.channels.get('505510320949821450').send(newtweet)
 
   }else{
     console.log ('No Interest')

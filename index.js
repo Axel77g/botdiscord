@@ -22,10 +22,10 @@ var bot = new Discord.Client();
 var Twit = require('twit')
 
 var T = new Twit({
-  consumer_key:         'TZNKcEBfebspH8uFkHkFizKvQ',
-  consumer_secret:      'QretEAbd8kxtzk9iPnXLlWlSP3PLlODNtoued3Vk9NiUeVf4VT',
-  access_token:         '899043174924132352-9bEMrz6JeNIRGMbmF4tmH7eRzdJzVNI',
-  access_token_secret:  '4hBdm8qzcssP2a5pHXjV9Kl3lkXlULESmhgDna2OiiXNf',
+  consumer_key:         process.env.consumer_key,
+  consumer_secret:      process.env.consumer_secret,
+  access_token:         process.env.access_token,
+  access_token_secret:  process.env.access_token_secret,
 });
 
 

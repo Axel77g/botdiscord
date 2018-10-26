@@ -1,5 +1,5 @@
 //L'utilisation de ce code est interdite sans accord.
-/*var resultdate = ""
+var resultdate = ""
 
 function createDate(dateachange){
 
@@ -29,7 +29,7 @@ var T = new Twit({
 });
 
 
-*/
+
 
 const PREFIX = "!";
 

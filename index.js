@@ -47,8 +47,6 @@ bot.on('ready', () => {
 
 });
 
-bot.login('NDY5MDc3MTc1ODkxMzk0NTYx.DjCd0w.hHsgGQtSg6MKZ2sod6rVsdpTA6Y');
-
 
 //evenement Nouveau membre
 

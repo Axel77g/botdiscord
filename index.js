@@ -1164,7 +1164,7 @@ bot.on('message', message => {
     }
   }
 
-  if(message.channel.id === '505507727267856385' || message.channel.id === '505503616308740096'){
+  if(message.channel.id === '505503616308740096' || message.channel.id === '505506374302564372'){
 
     if(message.author.id != bot.user.id){
 

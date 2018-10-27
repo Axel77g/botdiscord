@@ -530,7 +530,7 @@ bot.on('message', message => {
         
         var motif = splitmessage[1];
 
-        mention = message.mentions.users.first();
+        var mention = message.mentions.users.first();
 
         
 
@@ -538,7 +538,7 @@ bot.on('message', message => {
           return
         } else {
 
-          let = report = new Discord.RichEmbed()
+          let report = new Discord.RichEmbed()
 
             .setAuthor(message.member.nickname, message.author.avatarURL)
 
@@ -553,7 +553,7 @@ bot.on('message', message => {
 
           message.channel.send(`${message.member} Votre reclamation va être prise en charge`);
 
-          bot.channels.get('305345723472543745').send(report);
+          bot.channels.get('505507727267856385').send(report);
 
           log(`command : ${message.content} avec la mention : ${mention} fait par ${message.author.username}`)
 

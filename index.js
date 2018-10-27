@@ -1111,7 +1111,7 @@ bot.on('message', message => {
 
         .then(connection => {
 
-          const stream = ytdl(link, { filter : 'audioonly', quality: 'highestaudio'});
+          const stream = ytdl(link, { filter : 'audioonly', quality: 'lowest'});
 
           const dispatcher = connection.playStream(stream, streamOptions);
 

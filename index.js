@@ -1305,7 +1305,7 @@ bot.on('message', message => {
           time = time + 1 // seconde
           console.log(time)
 
-          if(time === 5){
+          if(time === 3600){
 
             function findit(role){
 

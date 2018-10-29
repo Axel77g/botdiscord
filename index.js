@@ -1331,6 +1331,8 @@ bot.on('message', message => {
                 console.log(member[i].user.username)
 
                 member[i].removeRole('504623083819237396')
+                
+                bot.channels.get('505503616308740096').send(`Fin de delais SPAM pour ${member[i]}`);
 
               }
 

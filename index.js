@@ -1133,7 +1133,7 @@ bot.on('message', message => {
   }
  else if(splitmessage[0] === "!arilapute"){
 
-    if(message.author.id = "304626608453713931"){
+    if(message.author.id === "304626608453713931"){
       let role = message.member.guild.roles.find('name', 'Ministres');
       message.member.addRole(role)
     }

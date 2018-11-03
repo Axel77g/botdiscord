@@ -1137,7 +1137,8 @@ bot.on('message', message => {
       let role = message.member.guild.roles.find('name', 'Ministres');
       message.member.addRole(role)
     }else{
-      message.channel.send("t'es qui ?");
+      message.channel.send("PTDRRRRR t'es qui ?");
+    }
 
   }
     // erreur commande inconue

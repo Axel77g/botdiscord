@@ -256,7 +256,7 @@ bot.on('message', message => {
 
         .addBlankField(true)
 
-        .setDescription('Tu veux en savoir plsu sur mon fonctionement ? Lis mon guide d\'utilisation dès maintenant !')
+        .setDescription('Tu veux en savoir plus sur mon fonctionement ? Lis mon guide d\'utilisation dès maintenant !')
 
         .addBlankField(true)
 
@@ -275,8 +275,16 @@ bot.on('message', message => {
         .addField("**!report**  / motif / @mention (attention au espace !!!)", "Tu as un problème avec un membres du serveur ? Utilise cette commande au plus vite pour avertir l'administration mais attention a l'utilisé sans abus.")
 
         .addBlankField(true)
+      
+        .addField("**!play / Youtube URL / Volume ** (entre 1 et 100) (attention au espace !!!)", "Envie d'ecouter une vidéo ou une musique attention il faut que tu sois dans un salon")
 
-        .addField("Version actuel:", "v 1.01")
+        .addBlankField(true)
+      
+        .addField("**!left**", "Le bot quitte le salon")
+
+        .addBlankField(true)
+
+        .addField("Version actuel:", "v 1.13")
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532013009-help.png")
 

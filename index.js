@@ -10,7 +10,7 @@ function createDate(dateachange){
   var dataheure = splitdata[4].split(":")
   console.log(dataheure[0]);
   console.log(dataheure[1])
-  resultdate = day + " " + month + " " + years + " à " + dataheure[0] - 2 + "h" + dataheure[1]
+  resultdate = day + " " + month + " " + years + " à " + dataheure[0] + "h" + dataheure[1]
   return resultdate
 
 }
@@ -65,7 +65,7 @@ bot.on('guildMemberAdd', member => {
     }
     var anee = now.getFullYear()
 
-    var hours = now.getHours() + 2
+    var hours = now.getHours() + 1
     if(hours < 10){
       var hours = "0" + hours
     }
@@ -149,7 +149,7 @@ bot.on('channelCreate', channel => {
     }
     var anee = now.getFullYear()
 
-    var hours = now.getHours() + 2
+    var hours = now.getHours() + 1
     if(hours < 10){
       var hours = "0" + hours
     }
@@ -229,7 +229,7 @@ bot.on('message', message => {
       }
       var anee = now.getFullYear()
 
-      var hours = now.getHours() + 2
+      var hours = now.getHours() + 1
       if(hours < 10){
         var hours = "0" + hours
       }
@@ -1380,7 +1380,7 @@ var now = new Date()
       }
       var anee = now.getFullYear()
 
-      var hours = now.getHours() + 2
+      var hours = now.getHours() + 1
       if(hours < 10){
         var hours = "0" + hours
       }
@@ -1458,7 +1458,7 @@ function log(data){
       }
       var anee = now.getFullYear()
 
-      var hours = now.getHours() + 2
+      var hours = now.getHours() + 1
       if(hours < 10){
         var hours = "0" + hours
       }

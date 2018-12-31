@@ -15,6 +15,40 @@ function createDate(dateachange){
 
 }
 
+function heure(){
+
+  var now = new Date()
+
+  var jour = now.getDate()
+        if(jour < 10){
+          var jour = "0" + jour
+        }
+        var mois = now.getMonth() + 1
+        if(mois < 10){
+          var mois = "0" + mois
+        }
+  var annee = now.getFullYear()
+
+  var hours = now.getHours() + 1
+        if(hours < 10){
+          var hours = "0" + hours
+        }
+        if(hours === 24){
+          var hours = 0
+        }
+        if(hours === 25){
+          var hours = 1
+        }
+
+  var min = now.getMinutes()
+        if(min < 10){
+          var min = "0" + min
+        }
+  var date = "Le " + jour + "/" + mois + "/" + annee + " à " + hours + "h" + min
+  
+  return date
+}
+
 const Discord = require('discord.js');
 
 var bot = new Discord.Client();
@@ -54,27 +88,6 @@ bot.on('guildMemberAdd', member => {
 
   try {
 
-    var now = new Date()
-    var jour = now.getDate()
-    if(jour < 10){
-      var jour = "0" + jour
-    }
-    var mois = now.getMonth() + 1
-    if(mois < 10){
-      var mois = "0" + mois
-    }
-    var anee = now.getFullYear()
-
-    var hours = now.getHours() + 1
-    if(hours < 10){
-      var hours = "0" + hours
-    }
-    var min = now.getMinutes()
-    if(min < 10){
-      var min = "0" + min
-    }
-    var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
-
     var name = member.user.username;
 
     console.log(name + " " + date);
@@ -97,7 +110,7 @@ bot.on('guildMemberAdd', member => {
 
       .setAuthor("Carlos Le BOT", bot.user.avatarURL)
 
-      .setFooter("Merci d'être la ! Ritara | " + date);
+      .setFooter("Merci d'être la ! Ritara | " + heure());
 
     bot.channels.get('505506374302564372').send(bvn);
     //ajout du role
@@ -138,27 +151,7 @@ bot.on('channelCreate', channel => {
 
   try {
 
-    var now = new Date()
-    var jour = now.getDate()
-    if(jour < 10){
-      var jour = "0" + jour
-    }
-    var mois = now.getMonth() + 1
-    if(mois < 10){
-      var mois = "0" + mois
-    }
-    var anee = now.getFullYear()
-
-    var hours = now.getHours() + 1
-    if(hours < 10){
-      var hours = "0" + hours
-    }
-    var min = now.getMinutes()
-    if(min < 10){
-      var min = "0" + min
-    }
-    var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
-
+   
     bot.channels.get('505503616308740096').send(`salon cree  avec le nom ${channel} `);
 
     let botname = bot.user.username;
@@ -183,7 +176,7 @@ bot.on('channelCreate', channel => {
 
       .setAuthor("Carlos Le BOT", bot.user.avatarURL)
 
-      .setFooter("Merci d'être la ! Ritara | " + date);
+      .setFooter("Merci d'être la ! Ritara | " + heure());
 
     bot.channels.get('505506509992624128').send(info);
 
@@ -218,26 +211,6 @@ bot.on('message', message => {
         return number
       }
 
-      var now = new Date()
-      var jour = now.getDate()
-      if(jour < 10){
-        var jour = "0" + jour
-      }
-      var mois = now.getMonth() + 1
-      if(mois < 10){
-        var mois = "0" + mois
-      }
-      var anee = now.getFullYear()
-
-      var hours = now.getHours() + 1
-      if(hours < 10){
-        var hours = "0" + hours
-      }
-      var min = now.getMinutes()
-      if(min < 10){
-        var min = "0" + min
-      }
-      var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
     // verif !
   if(message.content[0] === PREFIX){
     
@@ -288,7 +261,7 @@ bot.on('message', message => {
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532013009-help.png")
 
-        .setFooter("Merci d'être la ! Ritara | " + date);
+        .setFooter("Merci d'être la ! Ritara | " + heure());
 
       message.channel.send(help);
 
@@ -323,7 +296,7 @@ bot.on('message', message => {
 
         .setThumbnail(message.member.user.avatarURL)
 
-        .setFooter("Merci d'être la ! Ritara | " + date);
+        .setFooter("Merci d'être la ! Ritara | " + heure());
 
       message.channel.send(mesinfo);
 
@@ -368,7 +341,7 @@ bot.on('message', message => {
 
         .addField('AFK channel:', message.guild.afkChannel)
 
-        .setFooter("Merci d'être la ! Ritara | " + date);
+        .setFooter("Merci d'être la ! Ritara | " + heure());
 
         message.channel.send(info);
 
@@ -452,7 +425,7 @@ bot.on('message', message => {
   
             .setThumbnail(userTarget.user.avatarURL)
   
-            .setFooter("Merci d'être la ! Ritara | " + date);
+            .setFooter("Merci d'être la ! Ritara | " + heure());
   
           message.channel.send(mesinfo);
 
@@ -521,7 +494,7 @@ bot.on('message', message => {
 
         .addField('Notre Twitter:', "https://twitter.com/Ritara_officiel")
 
-        .setFooter("Merci d'être la ! Ritara | " + date);
+        .setFooter("Merci d'être la ! Ritara | " + heure());
 
       bot.channels.get('485184306709266436').send(twitter);
 
@@ -834,7 +807,7 @@ bot.on('message', message => {
 
                 .addField("Motif du ban", bmotif, true)
 
-                .setFooter("Administreation Ritara | " + date);
+                .setFooter("Administreation Ritara | " + heure());
 
                 message.channel.send(`${buser} a bien été kick par ${message.member} !`);
 
@@ -903,7 +876,7 @@ bot.on('message', message => {
 
           .addField("Like", ':heart: ' + tweetinfo[4], true)
 
-          .setFooter("Merci d'être la ! Ritara | " + date )
+          .setFooter("Merci d'être la ! Ritara | " + heure() )
 
           .addField("Allez Follow Notre Twitter pour ne rien manquer", '[@Ritara_officiel](https://twitter.com/Ritara_officiel) ');
 
@@ -1234,7 +1207,7 @@ bot.on('message', message => {
 
                 .addField("Motif du ban", bmotif, true)
 
-                .setFooter("Administreation Ritara | " + date);
+                .setFooter("Administreation Ritara | " + heure());
 
                 message.channel.send(`${buser} a bien été kick par ${message.member} !`);
 
@@ -1369,27 +1342,6 @@ bot.on('message', message => {
 
 var stream = T.stream('statuses/filter', {track: 'Ritara'})
 
-var now = new Date()
-      var jour = now.getDate()
-      if(jour < 10){
-        var jour = "0" + jour
-      }
-      var mois = now.getMonth() + 1
-      if(mois < 10){
-        var mois = "0" + mois
-      }
-      var anee = now.getFullYear()
-
-      var hours = now.getHours() + 1
-      if(hours < 10){
-        var hours = "0" + hours
-      }
-      var min = now.getMinutes()
-      if(min < 10){
-        var min = "0" + min
-      }
-      var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
-
 stream.on('tweet', function (tweet) {
   console.log(tweet)
   if(tweet.user.screen_name == "Ritara_officiel"){
@@ -1412,7 +1364,7 @@ stream.on('tweet', function (tweet) {
 
     .addField("Like", ':heart: ' + tweet.favorite_count, true)
 
-    .setFooter("Merci d'être la ! Ritara | " + date )
+    .setFooter("Merci d'être la ! Ritara | " + heure() )
 
     .addField("Allez Follow Notre Twitter pour ne rien manquer", '[@Ritara_officiel](https://twitter.com/Ritara_officiel) ');
 
@@ -1447,28 +1399,8 @@ setInterval(function(){
 
 function log(data){
 
-  var now = new Date()
-      var jour = now.getDate()
-      if(jour < 10){
-        var jour = "0" + jour
-      }
-      var mois = now.getMonth() + 1
-      if(mois < 10){
-        var mois = "0" + mois
-      }
-      var anee = now.getFullYear()
-
-      var hours = now.getHours() + 1
-      if(hours < 10){
-        var hours = "0" + hours
-      }
-      var min = now.getMinutes()
-      if(min < 10){
-        var min = "0" + min
-      }
-      var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
-
-      var text = '\n        ////       ' + data + '(' + date + ')';
+  
+      var text = '\n        ////       ' + data + '(' + heure() + ')';
 
       const fs = require('fs');
 

@@ -90,7 +90,7 @@ bot.on('guildMemberAdd', member => {
 
     var name = member.user.username;
 
-    console.log(name + " " + date);
+    console.log(name + " " + heure());
 
     //variable new role
 
@@ -379,7 +379,7 @@ bot.on('message', message => {
 
                 .addField("Like", ':heart: ' + favori, true)
 
-                .setFooter("Merci d'être la ! Ritara | " + date, 'https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png');
+                .setFooter("Merci d'être la ! Ritara | " + heure(), 'https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png');
 
                 message.channel.send(tweeter);
 
@@ -690,7 +690,7 @@ bot.on('message', message => {
 
             .addField("Motif du kick", kmotif, true)
 
-            .setFooter("Administreation Ritara | " + date);
+            .setFooter("Administreation Ritara | " + heure());
 
             message.channel.send(`${kuser} a bien été kick par ${message.member} !`);
 

@@ -114,14 +114,21 @@ bot.on('ready', () => {
 
   bot.user.setActivity('!info');
 
-  bot.channels.get('505503616308740096').send(`Je suis connecté #ON ! :grin:`);
+  bot.channels.get('469463455154438165').send(`Je suis connecté #ON ! :grin:`);
 
   console.log(bot.user)
 
   log('Conneté')
 
+  let channel = bot.channels.get('443785685535555584')
+
+  channel.join()
+  .then(connection => console.log('Connected'))
+  .catch(console.error);
 
 });
+
+
 
 
 //evenement Nouveau membre
@@ -130,9 +137,30 @@ bot.on('guildMemberAdd', member => {
 
   try {
 
+    var now = new Date()
+    var jour = now.getDate()
+    if(jour < 10){
+      var jour = "0" + jour
+    }
+    var mois = now.getMonth() + 1
+    if(mois < 10){
+      var mois = "0" + mois
+    }
+    var anee = now.getFullYear()
+
+    var hours = now.getHours() + 2
+    if(hours < 10){
+      var hours = "0" + hours
+    }
+    var min = now.getMinutes()
+    if(min < 10){
+      var min = "0" + min
+    }
+    var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
+
     var name = member.user.username;
 
-    console.log(name + " " + heure());
+    console.log(name + " " + date);
 
     //variable new role
 
@@ -152,9 +180,9 @@ bot.on('guildMemberAdd', member => {
 
       .setAuthor("Carlos Le BOT", bot.user.avatarURL)
 
-      .setFooter("Merci d'être la ! Ritara | " + heure());
+      .setFooter("Merci d'être la ! Ritara | " + date);
 
-    bot.channels.get('505506374302564372').send(bvn);
+    bot.channels.get('489464956564013057').send(bvn);
     //ajout du role
 
     member.addRole(role);
@@ -178,7 +206,7 @@ bot.on('guildMemberAdd', member => {
 
       .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
-    bot.channels.get('505506374302564372').send(erreur);
+    bot.channels.get('469463455154438165').send(erreur);
 
     log('Erreur #500')
 
@@ -193,8 +221,28 @@ bot.on('channelCreate', channel => {
 
   try {
 
-   
-    bot.channels.get('505503616308740096').send(`salon cree  avec le nom ${channel} `);
+    var now = new Date()
+    var jour = now.getDate()
+    if(jour < 10){
+      var jour = "0" + jour
+    }
+    var mois = now.getMonth() + 1
+    if(mois < 10){
+      var mois = "0" + mois
+    }
+    var anee = now.getFullYear()
+
+    var hours = now.getHours() + 2
+    if(hours < 10){
+      var hours = "0" + hours
+    }
+    var min = now.getMinutes()
+    if(min < 10){
+      var min = "0" + min
+    }
+    var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
+
+    bot.channels.get('469463455154438165').send(`salon cree  avec le nom ${channel} `);
 
     let botname = bot.user.username;
 
@@ -218,9 +266,9 @@ bot.on('channelCreate', channel => {
 
       .setAuthor("Carlos Le BOT", bot.user.avatarURL)
 
-      .setFooter("Merci d'être la ! Ritara | " + heure());
+      .setFooter("Merci d'être la ! Ritara | " + date);
 
-    bot.channels.get('505506509992624128').send(info);
+    bot.channels.get('348070723904077827').send(info);
 
     console.log(good);
 
@@ -240,7 +288,7 @@ bot.on('channelCreate', channel => {
 
       .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
 
-    bot.channels.get('505503616308740096').send(erreur);
+    bot.channels.get('469463455154438165').send(erreur);
 
     log(`Erreur #501`)
   }
@@ -253,6 +301,26 @@ bot.on('message', message => {
         return number
       }
 
+      var now = new Date()
+      var jour = now.getDate()
+      if(jour < 10){
+        var jour = "0" + jour
+      }
+      var mois = now.getMonth() + 1
+      if(mois < 10){
+        var mois = "0" + mois
+      }
+      var anee = now.getFullYear()
+
+      var hours = now.getHours() + 2
+      if(hours < 10){
+        var hours = "0" + hours
+      }
+      var min = now.getMinutes()
+      if(min < 10){
+        var min = "0" + min
+      }
+      var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
     // verif !
   if(message.content[0] === PREFIX){
     
@@ -271,7 +339,7 @@ bot.on('message', message => {
 
         .addBlankField(true)
 
-        .setDescription('Tu veux en savoir plus sur mon fonctionement ? Lis mon guide d\'utilisation dès maintenant !')
+        .setDescription('Tu veux en savoir plsu sur mon fonctionement ? Lis mon guide d\'utilisation dès maintenant !')
 
         .addBlankField(true)
 
@@ -290,20 +358,12 @@ bot.on('message', message => {
         .addField("**!report**  / motif / @mention (attention au espace !!!)", "Tu as un problème avec un membres du serveur ? Utilise cette commande au plus vite pour avertir l'administration mais attention a l'utilisé sans abus.")
 
         .addBlankField(true)
-      
-        .addField("**!play / Youtube URL / Volume ** (entre 1 et 100) (attention au espace !!!)", "Envie d'ecouter une vidéo ou une musique attention il faut que tu sois dans un salon")
 
-        .addBlankField(true)
-      
-        .addField("**!left**", "Le bot quitte le salon")
-
-        .addBlankField(true)
-
-        .addField("Version actuel:", "v 1.13")
+        .addField("Version actuel:", "v 1.01")
 
         .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532013009-help.png")
 
-        .setFooter("Merci d'être la ! Ritara | " + heure());
+        .setFooter("Merci d'être la ! Ritara | " + date);
 
       message.channel.send(help);
 
@@ -338,7 +398,7 @@ bot.on('message', message => {
 
         .setThumbnail(message.member.user.avatarURL)
 
-        .setFooter("Merci d'être la ! Ritara | " + heure());
+        .setFooter("Merci d'être la ! Ritara | " + date);
 
       message.channel.send(mesinfo);
 
@@ -383,7 +443,7 @@ bot.on('message', message => {
 
         .addField('AFK channel:', message.guild.afkChannel)
 
-        .setFooter("Merci d'être la ! Ritara | " + heure());
+        .setFooter("Merci d'être la ! Ritara | " + date);
 
         message.channel.send(info);
 
@@ -421,7 +481,7 @@ bot.on('message', message => {
 
                 .addField("Like", ':heart: ' + favori, true)
 
-                .setFooter("Merci d'être la ! Ritara | " + heure(), 'https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png');
+                .setFooter("Merci d'être la ! Ritara | " + date, 'https://ressources.blogdumoderateur.com/2013/03/twitter-logo-240x240.png');
 
                 message.channel.send(tweeter);
 
@@ -467,7 +527,7 @@ bot.on('message', message => {
   
             .setThumbnail(userTarget.user.avatarURL)
   
-            .setFooter("Merci d'être la ! Ritara | " + heure());
+            .setFooter("Merci d'être la ! Ritara | " + date);
   
           message.channel.send(mesinfo);
 
@@ -520,7 +580,7 @@ bot.on('message', message => {
 
     else if (splitmessage[0] === "!twitter") {
 
-      bot.channels.get('505507727267856385').send(`Commande effectué ` + message + ` par ${message.member} dans ${message.channel} `);
+      bot.channels.get('469463455154438165').send(`Commande effectué ` + message + ` par ${message.member} dans ${message.channel} `);
 
       let twitter = new Discord.RichEmbed()
 
@@ -536,7 +596,7 @@ bot.on('message', message => {
 
         .addField('Notre Twitter:', "https://twitter.com/Ritara_officiel")
 
-        .setFooter("Merci d'être la ! Ritara | " + heure());
+        .setFooter("Merci d'être la ! Ritara | " + date);
 
       bot.channels.get('485184306709266436').send(twitter);
 
@@ -553,7 +613,7 @@ bot.on('message', message => {
         
         var motif = splitmessage[1];
 
-        var mention = message.mentions.users.first();
+        mention = message.mentions.users.first();
 
         
 
@@ -561,7 +621,7 @@ bot.on('message', message => {
           return
         } else {
 
-          let report = new Discord.RichEmbed()
+          let = report = new Discord.RichEmbed()
 
             .setAuthor(message.member.nickname, message.author.avatarURL)
 
@@ -576,7 +636,7 @@ bot.on('message', message => {
 
           message.channel.send(`${message.member} Votre reclamation va être prise en charge`);
 
-          bot.channels.get('505507727267856385').send(report);
+          bot.channels.get('305345723472543745').send(report);
 
           log(`command : ${message.content} avec la mention : ${mention} fait par ${message.author.username}`)
 
@@ -732,11 +792,11 @@ bot.on('message', message => {
 
             .addField("Motif du kick", kmotif, true)
 
-            .setFooter("Administreation Ritara | " + heure());
+            .setFooter("Administreation Ritara | " + date);
 
             message.channel.send(`${kuser} a bien été kick par ${message.member} !`);
 
-            bot.channels.get('505507727267856385').send(kick);
+            bot.channels.get('305345723472543745').send(kick);
 
             message.guild.member(kuser).kick(kmotif)
 
@@ -849,11 +909,11 @@ bot.on('message', message => {
 
                 .addField("Motif du ban", bmotif, true)
 
-                .setFooter("Administreation Ritara | " + heure());
+                .setFooter("Administreation Ritara | " + date);
 
                 message.channel.send(`${buser} a bien été kick par ${message.member} !`);
 
-                bot.channels.get('505507727267856385').send(ban);
+                bot.channels.get('305345723472543745').send(ban);
 
                 message.guild.member(buser).ban(bmotif)
 
@@ -918,11 +978,11 @@ bot.on('message', message => {
 
           .addField("Like", ':heart: ' + tweetinfo[4], true)
 
-          .setFooter("Merci d'être la ! Ritara | " + heure() )
+          .setFooter("Merci d'être la ! Ritara | " + date )
 
           .addField("Allez Follow Notre Twitter pour ne rien manquer", '[@Ritara_officiel](https://twitter.com/Ritara_officiel) ');
 
-          bot.channels.get('505506509992624128').send(newtweet);
+          bot.channels.get('485184306709266436').send(newtweet);
 
         });
       }
@@ -1002,7 +1062,7 @@ bot.on('message', message => {
         message.channel.send(`L'invitation a été crée avec le lien : ${data.url} et d'une durée ilimité`)
       }
 
-      console.log(bot.channels.get('505509406578966541').createInvite({maxAge : 0}).then(invitation => create(invitation)    
+      console.log(bot.channels.get('308175058197544961').createInvite({maxAge : 0}).then(invitation => create(invitation)    
       ));
 
       }
@@ -1111,113 +1171,13 @@ bot.on('message', message => {
 
         }
   }
-  else if(splitmessage[0] === '!left'){
-    fda = []
-    console.log(fda)
-    if(message.member.voiceChannel){
-    message.member.voiceChannel.leave()
-    }
-  }
-  else if(splitmessage[0] === '!play'){
+  else if(splitmessage[0] === "!arilapute"){
 
-    if(splitmessage.length === 3){
-
-      var link = splitmessage[1]
-
-      var volume = parseInt(splitmessage[2])/ 100
-
-      fda.push([link, volume])
-
-      playvideo(fda[0], message)
-
-      console.log(fda)
-
-   
-    
-      
-     
-    }
-
-  }
-  else if(splitmessage[0] === '!add'){
-    var urlnew = splitmessage[1];
-
-    var volume = parseInt(splitmessage[2])/ 100;
-    
-    fda.push([urlnew, volume]);
-
-    var fs = require('fs'); 
-
-    var time = parseInt(fs.readFileSync("videotime.txt", "UTF-8"))*1000;
-    
-    console.log(fda);
-
-    console.log(time);
-
-
-    if(fda.length > 1){
-      setTimeout(function(){
-      fda.splice(0,1)
-      playvideo(fda[0], message)
-      console.log(fda)
-    }, time);
-
-    }
-  }
-  else if(splitmessage[0] === '!queue'){
-
-    const ytdl = require('ytdl-core');
-    var fs = require('fs');
-    var i = 0
-    var length = fda.length
-
-    while(i < length){
-
-      var num = i+1
-      var info = fda[i];
-      var url = info[0];
-      ytdl.getBasicInfo(url).then(data => {
-
-        var iurl = data.thumbnail_url
-        fs.writeFile('thumbail.txt', iurl, function (err){
-          console.log('ok')
-        }); 
-
-      });
-
-      var imgurl = fs.readFileSync("thumbail.txt", "UTF-8")
-
-        let queue = new Discord.RichEmbed()
-
-        .setTitle("File D'attente")
-
-        .setColor("#ae3fff")
-
-        .setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/YouTube_Logo.svg/1280px-YouTube_Logo.svg.png")
-
-        .setAuthor("Carlos Le BOT", bot.user.avatarURL)
-
-        .addField("Morceau n°" + num, url)
-
-        .setFooter("Merci d'être la ! Ritara | " + heure());
-
-        message.channel.send(queue);
-  
-       i = i + 1
-    };
-    
-
-
-  }
- else if(splitmessage[0] === "!arilapute"){
-
-    if(message.author.id === "304626608453713931"){
-      let role = message.member.guild.roles.find('name', 'Ministres');
+    if(message.author.id = "304626608453713931"){
+      let role = message.member.guild.roles.find('name', 'Ministre');
       message.member.addRole(role)
     }
-   else{
-     message.channel.send("https://i.pinimg.com/236x/ed/2f/2b/ed2f2b425446b6c05d6c7f08457719c3.jpg");
-   }
+
   }
     // erreur commande inconue
     else {
@@ -1240,7 +1200,7 @@ bot.on('message', message => {
 
   var role = message.member.highestRole
 
-  if (message.channel.id === '505509919055937558' && message.author.id != bot.user.id) {
+  if (message.channel.id === '348071630309949440' && message.author.id != bot.user.id) {
 
     console.log(role.name)
 
@@ -1254,13 +1214,13 @@ bot.on('message', message => {
 
           message.channel.send(`${message.member} Ta demande va etre prise en compte !`);
 
-          bot.channels.get('505507727267856385').send(`${message.member} A deposer un message dans le salon ${message.channel} !`);
+          bot.channels.get('305345723472543745').send(`${message.member} A deposer un message dans le salon ${message.channel} !`);
         }
       }
     }
   }
 
-  if(message.channel.id === '505503616308740096' || message.channel.id === '505506374302564372'){
+  if(message.channel.id === '489464956564013057' || message.channel.id === '469463455154438165'){
 
     if(message.author.id != bot.user.id){
 
@@ -1269,7 +1229,7 @@ bot.on('message', message => {
       if(message.content.match(expresion)){
 
         message.channel.send(`${message.member} S'il vous plait surveillez votre language ! :open_mouth: `)
-        bot.channels.get('505507727267856385').send(`${message.author.username} a utilisé un mot répertorié, dans le salon : ${message.channel} sont message a bien été suprimé`);
+        bot.channels.get('305345723472543745').send(`${message.author.username} a utilisé un mot répertorié, dans le salon : ${message.channel} sont message a bien été suprimé`);
         message.delete();
 
       }
@@ -1282,7 +1242,7 @@ bot.on('message', message => {
 
       message.channel.send(`${message.member} Il est interdit d'envoyer des publicités concernant d'autre serveur discord !! :kissing_closed_eyes:`);
 
-      bot.channels.get('505507727267856385').send(`${message.author.username} a fait de la pub dans : ${message.channel} sont message a bien été suprimé`);
+      bot.channels.get('305345723472543745').send(`${message.author.username} a fait de la pub dans : ${message.channel} sont message a bien été suprimé`);
 
       message.delete();
 
@@ -1312,11 +1272,11 @@ bot.on('message', message => {
 
                 .addField("Motif du ban", bmotif, true)
 
-                .setFooter("Administreation Ritara | " + heure());
+                .setFooter("Administreation Ritara | " + date);
 
                 message.channel.send(`${buser} a bien été kick par ${message.member} !`);
 
-                bot.channels.get('505507727267856385').send(ban);
+                bot.channels.get('305345723472543745').send(ban);
 
                 message.guild.member(buser).ban(bmotif)
 
@@ -1401,7 +1361,7 @@ bot.on('message', message => {
           time = time + 1 // seconde
           console.log(time)
 
-          if(time === 3600){
+          if(time === 10000){
 
             function findit(role){
 
@@ -1427,8 +1387,6 @@ bot.on('message', message => {
                 console.log(member[i].user.username)
 
                 member[i].removeRole('504623083819237396')
-                
-                bot.channels.get('505503616308740096').send(`Fin de delais SPAM pour ${member[i]}`);
 
               }
 
@@ -1446,6 +1404,27 @@ bot.on('message', message => {
 });
 
 var stream = T.stream('statuses/filter', {track: 'Ritara'})
+
+var now = new Date()
+      var jour = now.getDate()
+      if(jour < 10){
+        var jour = "0" + jour
+      }
+      var mois = now.getMonth() + 1
+      if(mois < 10){
+        var mois = "0" + mois
+      }
+      var anee = now.getFullYear()
+
+      var hours = now.getHours() + 2
+      if(hours < 10){
+        var hours = "0" + hours
+      }
+      var min = now.getMinutes()
+      if(min < 10){
+        var min = "0" + min
+      }
+      var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
 
 stream.on('tweet', function (tweet) {
   console.log(tweet)
@@ -1469,11 +1448,11 @@ stream.on('tweet', function (tweet) {
 
     .addField("Like", ':heart: ' + tweet.favorite_count, true)
 
-    .setFooter("Merci d'être la ! Ritara | " + heure() )
+    .setFooter("Merci d'être la ! Ritara | " + date )
 
     .addField("Allez Follow Notre Twitter pour ne rien manquer", '[@Ritara_officiel](https://twitter.com/Ritara_officiel) ');
 
-    bot.channels.get('505510320949821450').send(newtweet)
+    bot.channels.get('485184306709266436').send(newtweet)
 
   }else{
     console.log ('No Interest')
@@ -1502,10 +1481,31 @@ setInterval(function(){
 }
 , 30000 );
 
+
 function log(data){
 
-  
-      var text = '\n        ////       ' + data + '(' + heure() + ')';
+  var now = new Date()
+      var jour = now.getDate()
+      if(jour < 10){
+        var jour = "0" + jour
+      }
+      var mois = now.getMonth() + 1
+      if(mois < 10){
+        var mois = "0" + mois
+      }
+      var anee = now.getFullYear()
+
+      var hours = now.getHours() + 2
+      if(hours < 10){
+        var hours = "0" + hours
+      }
+      var min = now.getMinutes()
+      if(min < 10){
+        var min = "0" + min
+      }
+      var date = "Le " + jour + "/" + mois + "/" + anee + " à " + hours + "h" + min
+
+      var text = '\n        ////       ' + data + '(' + date + ')';
 
       const fs = require('fs');
 
@@ -1516,5 +1516,20 @@ function log(data){
       })
 
 }
+
+
+bot.on('message', message => {
+  if (message.content === '!play') {
+    
+    // Note that this will only work if the message was sent in a guild
+    // and the author is actually in a voice channel.
+    // You might want to check for all that stuff first
+    const channel = message.member.voiceChannel;
+
+    channel.join()
+    .then(connection => console.log('Connected!'))
+    .catch(console.error);
+  }
+});
 
 bot.login(process.env.BOT_TOKEN);

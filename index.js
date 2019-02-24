@@ -25,6 +25,19 @@ function playvideo(data, message){
   const ytdl = require('ytdl-core');
 
   const streamOptions = { seek: 0, volume: volume };
+  
+  ytdl.getBasicInfo(link).then(videoinfo => {
+
+        var duree = parseInt(videoinfo.length_seconds)
+
+        var fs = require('fs');
+
+        fs.writeFile('videotime.txt', duree, function (err) {
+          if (err) throw err;
+          console.log('Saved!');
+        }); 
+
+      })
 
   if(message.member.voiceChannel){
 
@@ -37,19 +50,6 @@ function playvideo(data, message){
       const stream = ytdl(link, { filter : 'audioonly', quality: 'highest'});
 
       connection.playStream(stream, streamOptions);
-
-      ytdl.getBasicInfo(link).then(videoinfo => {
-
-        var duree = parseInt(videoinfo.length_seconds)
-
-        var fs = require('fs');
-
-        fs.writeFile('videotime.txt', duree, function (err) {
-          if (err) throw err;
-          console.log('Saved!');
-        }); 
-
-      })
       
     })
     .catch(console.error);

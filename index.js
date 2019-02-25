@@ -33,7 +33,7 @@ bot.login(process.env.BOT_TOKEN);
 bot.on('message', message => {
 const ytdl = require('ytdl-core');
 const streamOptions = { seek: 0, volume: 1 };
-message.membervoiceChannel.join()
+message.member.voiceChannel.join()
   .then(connection => {
     const stream = ytdl('https://www.youtube.com/watch?v=XAWgeLF9EVQ', { filter : 'audioonly' });
     const dispatcher = connection.playStream(stream, streamOptions);

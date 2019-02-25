@@ -1,5 +1,5 @@
 //L'utilisation de ce code est interdite sans accord.
-
+console.log('lunch')
 //VARIABLES//
 
 var resultdate = ""

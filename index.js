@@ -65,7 +65,7 @@ function connection(message){
       idconnexion = connexion
 
     }).catch(console.error)
-    console.log('connexion reussi')
+    console.log('connexion reussie')
     message.channel.send('**:loud_sound: CONNEXION REUSSIE**')
 
   }else{
@@ -83,8 +83,8 @@ function playsong(data){
   var channel = data[5]
   var streamOptions = { seek: 0, volume: volume };
   stream = ytdl(url, { filter : 'audioonly', quality: 'highest'});
-  console.log('INFO STREAM:', {url, volume, streamOptions, stream})
-  idconnexion.playStream(stream, streamOptions);
+  //console.log('INFO STREAM:', {url, volume, streamOptions, stream})
+  //idconnexion.playStream(stream, streamOptions);
   const dispatcher = idconnexion.playStream(stream, streamOptions);
   let infosong = new Discord.RichEmbed()
 

@@ -84,14 +84,8 @@ function playsong(data){
   var streamOptions = { seek: 0, volume: volume };
   stream = ytdl(url, { filter : 'audioonly', quality: 'highest'});
   console.log('INFO STREAM:', {url, volume, streamOptions, stream})
-  idconnexion.playStream(stream, streamOptions,function(suc, err){
-    if(suc){
-      console.log('STREAM LANCE')
-    }
-    if(err){
-      console.error(err)
-    }
-  })
+  idconnexion.playStream(stream, streamOptions);
+  const dispatcher = connection.playStream(stream, streamOptions);
   let infosong = new Discord.RichEmbed()
 
     .setTitle(title)

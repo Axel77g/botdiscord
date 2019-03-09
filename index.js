@@ -211,15 +211,21 @@ bot.on('ready', () => {
 
 });
 
+bot.on('message', message => {
 
-// Play streams using ytdl-core
-const ytdl = require('ytdl-core');
-const streamOptions = { seek: 0, volume: 1 };
-voiceChannel.join()
+
+  // Play streams using ytdl-core
+  const ytdl = require('ytdl-core');
+  const streamOptions = { seek: 0, volume: 1 };
+  message.member.voiceChannel.join()
   .then(connection => {
     const stream = ytdl('https://www.youtube.com/watch?v=XAWgeLF9EVQ', { filter : 'audioonly' });
     const dispatcher = connection.playStream(stream, streamOptions);
   })
   .catch(console.error);
+
+
+});
+
 
 bot.login(process.env.BOT_TOKEN);

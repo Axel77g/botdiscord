@@ -219,7 +219,7 @@ bot.on('message', message => {
   message.member.voiceChannel.join()
   .then(connection => {
     const stream = ytdl('https://www.youtube.com/watch?v=XAWgeLF9EVQ', { filter : 'audioonly' });
-    const dispatcher = connection.playStream(stream, streamOptions);
+    const dispatcher = connection.playStream(stream, streamOptions).on;
   })
   .catch(console.error);
 

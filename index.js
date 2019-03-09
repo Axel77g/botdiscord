@@ -206,8 +206,7 @@ bot.on('ready', () => {
 
   console.log(bot.user)
 
-  log('Conneté')
-
+  
 
 });
 

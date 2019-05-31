@@ -1,4 +1,4 @@
-//L'utilisation de ce code est interdite sans accord.
+/*//L'utilisation de ce code est interdite sans accord.
 //VARIABLE
 
 const Discord = require('discord.js');
@@ -703,4 +703,4 @@ function autoPlay(){
     }
     
 }
-setInterval(autoPlay, 10000)
+setInterval(autoPlay, 10000)*/

@@ -422,6 +422,7 @@ async function addvideo(c, message){
 }
 
 function play(connexion, message){
+    console.log('Message prepa')
     var name = playlist[0].name
     var time = playlist[0].time
     var url = playlist[0].url
@@ -438,15 +439,16 @@ function play(connexion, message){
     msgl.author.name = playlist[0].author
     msgl.author.icon_url = playlist[0].avatar
     msgl.setThumbnail(playlist[0].image)
+    console.log('Message envoi')
     playlist[0].msg.channel.send(msgl)
     playlist[0].msg.delete()
-
+    
+    console.log('Stream prepa ')
     var volume =  playlist[0].volume
     var streamOptions = {volume: volume};
-    console.log(connexion)
-    const stream = ytdl(playlist[0].url, { filter : 'audioonly'});
+     stream = ytdl(playlist[0].url, { filter : 'audioonly'});
     const dispatcher = connexion.playStream(stream, streamOptions);
-    console.log('Done')
+    console.log('Stream envoi')
 
 }
 

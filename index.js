@@ -443,8 +443,10 @@ function play(connexion, message){
 
     var volume =  playlist[0].volume
     var streamOptions = {volume: volume};
+    console.log(connexion)
     const stream = ytdl(playlist[0].url, { filter : 'audioonly'});
     const dispatcher = connexion.playStream(stream, streamOptions);
+    console.log('Done')
 
 }
 

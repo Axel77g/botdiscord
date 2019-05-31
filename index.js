@@ -543,7 +543,7 @@ function commandHelp(message, date){
             ["**!report**  / motif / @mention (attention au espace !!!)", "Tu as un problème avec un membres du serveur ? Utilise cette commande au plus vite pour avertir l'administration mais attention a l'utilisé sans abus."],
             ["**!play / Youtube URL / Volume ** (entre 1 et 100) (attention au espace !!!)", "Envie d'ecouter une vidéo ou une musique attention il faut que tu sois dans un salon"],
             ["**!left**", "Le bot quitte le salon"],
-            ["Version actuel:", "v 1.13"]
+            ["Version actuel:", "v 2.0.1"]
         ],
         date,
         undefined,

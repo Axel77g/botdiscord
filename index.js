@@ -720,9 +720,14 @@ bot.on('ready', () => {
         bot.channels.get('505503616308740096').send(msgrun);
         bot.channels.get('547487201047478285').join()
           .then(connection => {
-            const stream = ytdl('https://www.youtube.com/watch?v=XAWgeLF9EVQ', { filter : 'audioonly' });
-            const dispatcher = connection.playStream(stream, streamOptions);
+            const ytdl = require('ytdl-core-discord');
+            async function play(connection, url) {
+              connection.play(await ytdl(url), { type: 'opus' });
+            }
+            play(connection, "https://youtu.be/7MnVflaeJPE")
           })
           .catch(console.error);
             
+    
+    
       });

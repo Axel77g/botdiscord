@@ -716,6 +716,7 @@ bot.on('ready', () => {
            
         var daten = new Date()
         var msgrun = "ok"
+        const streamOptions = { seek: 0, volume: 1 };
         bot.channels.get('505503616308740096').send(msgrun);
         bot.channels.get('547487201047478285').join()
           .then(connection => {

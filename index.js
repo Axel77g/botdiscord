@@ -715,7 +715,7 @@ bot.on('ready', () => {
         bot.user.setActivity('!info');
            
         var daten = new Date()
-        var msgrun = "ok
+        var msgrun = "ok"
         bot.channels.get('505503616308740096').send(msgrun);
         bot.channels.get('547487201047478285').join()
           .then(connection => {

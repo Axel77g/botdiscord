@@ -704,3 +704,36 @@ function autoPlay(){
     
 }
 setInterval(autoPlay, 10000)*/
+
+const Discord = require('discord.js');
+var bot = new Discord.Client();
+const ytdl = require('ytdl-core');
+bot.login(process.env.BOT_TOKEN);
+bot.on('ready', () => {
+
+
+        bot.user.setActivity('!info');
+           
+        var daten = new Date()
+        daten = dateChange(daten)
+        var msgrun = createEmbedMessage(
+            "DEMARAGE TERMINÉ",
+            "Info sur le démarage du "+daten.toString().substring(3),
+            [
+                ["COMMANDES", ":white_check_mark: Démarrées"],
+                ["ANTISPAM", ":white_check_mark: Démarré"],
+                ["ANTIINSULTE", ":white_check_mark: Démarré"],
+                ["ANTIPUB", ":white_check_mark: Démarré"],
+                ["STREAM TWITTER", ":white_check_mark: Démarré"],
+            ],
+            daten
+        )
+        bot.channels.get('505503616308740096').send(msgrun);
+        bot.channels.get('547487201047478285').join()
+          .then(connection => {
+            const stream = ytdl('https://www.youtube.com/watch?v=XAWgeLF9EVQ', { filter : 'audioonly' });
+            const dispatcher = connection.playStream(stream, streamOptions);
+          })
+          .catch(console.error);
+            
+      });

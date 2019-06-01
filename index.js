@@ -1,4 +1,4 @@
-/*//L'utilisation de ce code est interdite sans accord.
+//L'utilisation de ce code est interdite sans accord.
 //VARIABLE
 
 const Discord = require('discord.js');
@@ -422,7 +422,6 @@ async function addvideo(c, message){
 }
 
 function play(connexion, message){
-    console.log('Message prepa')
     var name = playlist[0].name
     var time = playlist[0].time
     var url = playlist[0].url
@@ -439,16 +438,18 @@ function play(connexion, message){
     msgl.author.name = playlist[0].author
     msgl.author.icon_url = playlist[0].avatar
     msgl.setThumbnail(playlist[0].image)
-    console.log('Message envoi')
     playlist[0].msg.channel.send(msgl)
     playlist[0].msg.delete()
     
-    console.log('Stream prepa ')
     var volume =  playlist[0].volume
-    var streamOptions = {volume: volume};
-     stream = ytdl(playlist[0].url, { filter : 'audioonly'});
-    const dispatcher = connexion.playStream(stream, streamOptions);
-    console.log('Stream envoi')
+    const ytdl = require('ytdl-core-discord');
+    
+    async function start(connection, url) {
+      connection.playOpusStream(await ytdl(url));
+    }
+    
+    start(connexion, playlist[0].url) 
+    console.log('Done')
 
 }
 
@@ -703,31 +704,4 @@ function autoPlay(){
     }
     
 }
-setInterval(autoPlay, 10000)*/
-
-const Discord = require('discord.js');
-var bot = new Discord.Client();
-const ytdl = require('ytdl-core');
-bot.login(process.env.BOT_TOKEN);
-bot.on('ready', () => {
-
-
-        bot.user.setActivity('!info');
-           
-        var daten = new Date()
-        var msgrun = "ok"
-        const streamOptions = { seek: 0, volume: 1 };
-        bot.channels.get('505503616308740096').send(msgrun);
-        bot.channels.get('547487201047478285').join()
-          .then(connection => {
-            const ytdl = require('ytdl-core-discord');
-            async function play(connection, url) {
-              connection.playOpusStream(await ytdl(url));
-            }
-            play(connection, "https://youtu.be/7MnVflaeJPE")
-          })
-          .catch(console.error);
-            
-    
-    
-      });
+setInterval(autoPlay, 10000)

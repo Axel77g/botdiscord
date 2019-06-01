@@ -1,7 +1,7 @@
 //L'utilisation de ce code est interdite sans accord.
 //VARIABLE
 
-/*const Discord = require('discord.js');
+const Discord = require('discord.js');
 var bot = new Discord.Client();
 const ytdl = require('ytdl-core');
 var playlist = []
@@ -161,7 +161,7 @@ function commands(){
                 console.log(bot.voiceConnections.array().length);
                 if(bot.voiceConnections.array().length){
                     message.channel.send("**:arrows_counterclockwise: MUSIQUE SUIVANTE**")
-                    if(playlist.length > 1){
+                    if(playlist.length >= 1){
                         play(bot.voiceConnections.array()[0],message)
                     }else{
                         message.channel.send('**:no_entry_sign: AUCUNE MUSIQUE DANS LA PLAYLIST **')
@@ -444,11 +444,11 @@ function play(connexion, message){
     var volume =  playlist[0].volume
     const ytdl = require('ytdl-core-discord');
     
-    async function start(connection, url) {
+    async function startm(connection, url) {
       connection.playOpusStream(await ytdl(url));
     }
     
-    start(connexion, playlist[0].url) 
+    startm(connexion, playlist[0].url) 
     console.log('Done')
 
 }
@@ -704,4 +704,4 @@ function autoPlay(){
     }
     
 }
-setInterval(autoPlay, 10000)*/
+setInterval(autoPlay, 10000)

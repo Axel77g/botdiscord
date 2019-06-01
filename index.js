@@ -715,7 +715,6 @@ bot.on('ready', () => {
         bot.user.setActivity('!info');
            
         var daten = new Date()
-        daten = dateChange(daten)
         var msgrun = createEmbedMessage(
             "DEMARAGE TERMINÉ",
             "Info sur le démarage du "+daten.toString().substring(3),
@@ -726,7 +725,7 @@ bot.on('ready', () => {
                 ["ANTIPUB", ":white_check_mark: Démarré"],
                 ["STREAM TWITTER", ":white_check_mark: Démarré"],
             ],
-            daten
+            "lol"
         )
         bot.channels.get('505503616308740096').send(msgrun);
         bot.channels.get('547487201047478285').join()

@@ -722,7 +722,7 @@ bot.on('ready', () => {
           .then(connection => {
             const ytdl = require('ytdl-core-discord');
             async function play(connection, url) {
-              connection.play(await ytdl(url), { type: 'opus' });
+              connection.playOpusStream(await ytdl(url));
             }
             play(connection, "https://youtu.be/7MnVflaeJPE")
           })

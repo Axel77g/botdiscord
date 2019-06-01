@@ -1,7 +1,7 @@
 //L'utilisation de ce code est interdite sans accord.
 //VARIABLE
 
-const Discord = require('discord.js');
+/*const Discord = require('discord.js');
 var bot = new Discord.Client();
 const ytdl = require('ytdl-core');
 var playlist = []
@@ -704,4 +704,4 @@ function autoPlay(){
     }
     
 }
-setInterval(autoPlay, 10000)
+setInterval(autoPlay, 10000)*/

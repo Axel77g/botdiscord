@@ -715,18 +715,7 @@ bot.on('ready', () => {
         bot.user.setActivity('!info');
            
         var daten = new Date()
-        var msgrun = createEmbedMessage(
-            "DEMARAGE TERMINÉ",
-            "Info sur le démarage du "+daten.toString().substring(3),
-            [
-                ["COMMANDES", ":white_check_mark: Démarrées"],
-                ["ANTISPAM", ":white_check_mark: Démarré"],
-                ["ANTIINSULTE", ":white_check_mark: Démarré"],
-                ["ANTIPUB", ":white_check_mark: Démarré"],
-                ["STREAM TWITTER", ":white_check_mark: Démarré"],
-            ],
-            "lol"
-        )
+        var msgrun = "ok
         bot.channels.get('505503616308740096').send(msgrun);
         bot.channels.get('547487201047478285').join()
           .then(connection => {

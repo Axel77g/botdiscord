@@ -1,13 +1,14 @@
-//L'utilisation de ce code est interdite sans accord.
+// UTILISATION INTERDITE
 //VARIABLE
-
+const got = require('got');
 const Discord = require('discord.js');
 var bot = new Discord.Client();
 const ytdl = require('ytdl-core');
 var playlist = []
+const fs = require('fs')
 var antiSpamData = []
-
 //MAIN
+
 
 function start(){
 
@@ -25,6 +26,8 @@ function start(){
         antiInsulte()
         antiPub()
         streamTwitter()
+        level()
+        welcome()
 
         var daten = new Date()
         daten = dateChange(daten)
@@ -46,14 +49,72 @@ function start(){
 
     bot.login(process.env.BOT_TOKEN);
 
-    
-
 }   
+
+
+
+function welcome() {
+    
+    bot.on('guildMemberAdd', member => {
+        try { 
+          //variable new role
+      
+          let role = member.guild.roles.find('name', 'Assemblée');
+      
+          //message de bienvenue
+      
+          let bvn = new Discord.RichEmbed()
+      
+            .setTitle('Un nouveau membre a rejoins le serveur !')
+      
+            .setDescription(`Bienvenue sur Ritara ${member}, Merci de nous avoir rejoins. Bon jeu a toi !`)
+      
+            .setColor("#ae3fff")
+      
+            .setThumbnail(member.user.avatarURL)
+      
+            .setAuthor("Carlos Le BOT", bot.user.avatarURL)
+      
+            .setFooter("Merci d'être la ! Ritara | " +dateChange(member.joinedAt));
+      
+          bot.channels.get('505506374302564372').send(bvn);
+          //ajout du role
+      
+          member.addRole(role);
+        // refreh levelpoint
+          level()
+        } catch (error) {
+      
+          console.error(error);
+      
+          let erreur = new Discord.RichEmbed()
+      
+            .setColor("#960d0d")
+      
+            .setTitle('**ERREUR #500**')
+      
+            .addField("Il semblerait que Carlos rencontre un problème !", "Impossible d'Atribuée l'atribut")
+      
+            .setThumbnail("https://image.noelshack.com/fichiers/2018/29/4/1532001002-erreur.png");
+      
+          bot.channels.get('505506374302564372').send(erreur);
+      
+          log('Erreur #500')
+      
+        }
+      });
+
+}
 
 function commands(){
     
     const prefix = "!"
     bot.on('message', message => {
+
+        var memberid = message.member.id
+        if(memberid != bot.user.id){
+            fetchMembers(memberid, message)
+        }
 
         if(message.content[0] == prefix){
 
@@ -104,7 +165,7 @@ function commands(){
                         )
                         reportTicket.setAuthor(message.author.username , message.author.avatarURL)
                         message.channel.send(`${message.member} Votre reclamation va être prise en charge`);
-                        bot.channels.get('505507727267856385').send(reportTicket);
+                        bot.channels.get('505507727267856385').send(report);
 
                     }else{
                         error(message, 208)
@@ -161,7 +222,7 @@ function commands(){
                 console.log(bot.voiceConnections.array().length);
                 if(bot.voiceConnections.array().length){
                     message.channel.send("**:arrows_counterclockwise: MUSIQUE SUIVANTE**")
-                    if(playlist.length >= 1){
+                    if(playlist.length > 1){
                         play(bot.voiceConnections.array()[0],message)
                     }else{
                         message.channel.send('**:no_entry_sign: AUCUNE MUSIQUE DANS LA PLAYLIST **')
@@ -212,6 +273,28 @@ function commands(){
                     message.delete()
                 }
         
+            }
+            else if(command[0] == "blague"){
+                var rand = Math.floor(Math.random() * (115 - 1 +1)) + 1;
+                console.log(rand);
+                
+                got('https://bridge.buddyweb.fr/api/blagues/blagues/'+ rand).then(data => {
+                    var blague = JSON.parse(data.body).blagues
+                    
+                    var bmaguemsg =createEmbedMessage(
+                        "Blague",
+                        "Tu mas demandé une blague en voila une",
+                        [
+                            ["La blague:", blague]
+                        ],
+                        dateChange(message.createdAt)
+                    )
+                    message.channel.send(bmaguemsg)
+                })
+
+
+            }else{
+                error(message, 101)
             }
         } 
     })
@@ -355,6 +438,139 @@ function antiPub(){
     })
 }
 
+function fetchMembers(mbid, message){
+    fs.readFile('guildMembers.txt','utf-8', function(e,data){
+        if(data){
+            var membersSaved = data.split('\n');
+            var i = 0
+            while(i<membersSaved.length){
+                membersSaved[i] =membersSaved[i].split(',')
+                i++
+            }
+            var i = 0
+            while(i<membersSaved.length){
+                if(parseInt(mbid) == parseInt(membersSaved[i][0])){
+                    membersSaved[i][1] = parseInt(membersSaved[i][1])+1
+                }
+                i++
+            }
+
+            var guild = bot.guilds.array()[0]
+            var members = guild.members.array()
+            var i = 0 
+            while(i<membersSaved.length){
+                var idmember = membersSaved[i][0]
+                var pointmember = parseInt(membersSaved[i][1])
+                
+                if(pointmember >= 20){
+                    
+                    var o = 0
+                    while(o<members.length){
+                        if(parseInt(members[o].id) == parseInt(idmember)){                            
+                            var roles = members[o].roles.array()
+                            var l = 0
+                            var don = true
+                            while(l<roles.length){
+                                if(roles[l].id == '349289089293484035'){
+                                    don = false
+                                    break
+                                }else{
+                                    don = true
+                                }
+                                l++
+                            }
+                            
+                            
+                            if(don){
+                                members[o].addRole('349289089293484035')
+                                message.channel.send(`**BRAVO ${members[o]} Tu es desormais sénateurs !! :wink:**`)
+                            }
+                            
+                            break
+                        }
+                        o++
+                    }
+                }
+                i++
+            }
+
+            writeData(membersSaved)
+            
+        }
+    })
+}
+
+function writeData(membersSaved){
+
+    var i = 0
+    while(i<membersSaved.length){
+        membersSaved[i] = membersSaved[i].join(',')
+        i++
+    }
+    membersSaved = membersSaved.join('\n')
+    fs.writeFile('guildMembers.txt', membersSaved, function(e){
+        if (e) {
+            console.log(e);
+        }
+    })
+}
+
+function level(){
+
+    var guild = bot.guilds.array()[0]
+    var members = guild.members.array()
+    var i = 0
+    fs.readFile('guildMembers.txt','utf-8', function(e,data){
+        if(data){
+            var membersSaved = data.split('\n');
+            var i = 0
+            while(i<membersSaved.length){
+                membersSaved[i] =membersSaved[i].split(',')
+                i++
+            }
+            
+            
+            var i = 0 
+            while(i<members.length){
+
+                var o = 0
+                var exist = undefined
+
+                while(o<membersSaved.length && exist != 1){
+
+                    if(parseInt(members[i].id) == parseInt(membersSaved[o][0])){
+                        exist = 1
+                    }else{
+                        exist = 0
+                    }
+
+                    o++
+                }
+
+                if(exist != 1){
+                        
+                    membersSaved.push([members[i].id,0])
+                }
+
+                i++
+            }
+           
+            
+            var i = 0
+            while(i<membersSaved.length){
+                membersSaved[i][0] = parseInt(membersSaved[i][0])
+                membersSaved[i][1] = parseInt(membersSaved[i][1])
+                i++
+            }
+            
+            writeData(membersSaved)
+
+
+
+        }
+    }) 
+}
+
 function streamTwitter(){
 
     var Twit = require('twit')
@@ -440,16 +656,11 @@ function play(connexion, message){
     msgl.setThumbnail(playlist[0].image)
     playlist[0].msg.channel.send(msgl)
     playlist[0].msg.delete()
-    
+
     var volume =  playlist[0].volume
-    const ytdl = require('ytdl-core-discord');
-    
-    async function startm(connection, url) {
-      connection.playOpusStream(await ytdl(url));
-    }
-    
-    startm(connexion, playlist[0].url) 
-    console.log('Done')
+    var streamOptions = {volume: volume};
+    const stream = ytdl(playlist[0].url, { filter : 'audioonly'});
+    const dispatcher = connexion.playStream(stream, streamOptions);
 
 }
 
@@ -548,7 +759,7 @@ function commandHelp(message, date){
             ["**!report**  / motif / @mention (attention au espace !!!)", "Tu as un problème avec un membres du serveur ? Utilise cette commande au plus vite pour avertir l'administration mais attention a l'utilisé sans abus."],
             ["**!play / Youtube URL / Volume ** (entre 1 et 100) (attention au espace !!!)", "Envie d'ecouter une vidéo ou une musique attention il faut que tu sois dans un salon"],
             ["**!left**", "Le bot quitte le salon"],
-            ["Version actuel:", "v 2.0.1"]
+            ["Version actuel:", "v 1.13"]
         ],
         date,
         undefined,
@@ -676,6 +887,9 @@ function error(msg, code){
     }else if(code == 1001){
         embedmessage.addField("Il semblerait que Carlos rencontre un problème !", "Imposible de se connecter a un salon vocal")
         console.error(date+` | ERROR ${code}:  pas de salon`)
+    }else if(code == 101){
+        embedmessage.addField("Il semblerait que Carlos rencontre un problème !", "Commande Inconnue")
+        console.error(date+` | ERROR ${code}:  commande inconnue `)
     }
     else{
         embedmessage.addField("Il semblerait que Carlos rencontre un problème !", "Erreur Inopinée")
@@ -705,3 +919,13 @@ function autoPlay(){
     
 }
 setInterval(autoPlay, 10000)
+
+
+
+
+
+
+
+
+
+

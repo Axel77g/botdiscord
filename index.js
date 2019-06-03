@@ -25,7 +25,7 @@ function start(){
         antiSpam()
         antiInsulte()
         antiPub()
-        streamTwitter()
+        //streamTwitter()
         level()
         welcome()
 
@@ -827,8 +827,22 @@ function dateChange(date){
         month = '0'+month
     }
     var years = date.getFullYear()
-    var hours = date.getHours()
+    var hours = parseInt(date.getHours())+2
+    
+    if(hours == 24){
+        hours = 0
+    }else if(hours == 25){
+        hours = 1
+    }
+
+    if(hours< 10){
+        hours = '0'+hours
+    }
+
     var min = date.getMinutes()
+    if(parseInt(min) < 10){
+        min = '0'+min
+    }
     var date = `Le ${day}/${month}/${years} à ${hours}h${min}`
     return date
 }

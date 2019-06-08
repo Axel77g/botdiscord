@@ -222,7 +222,7 @@ function commands(){
                 console.log(bot.voiceConnections.array().length);
                 if(bot.voiceConnections.array().length){
                     message.channel.send("**:arrows_counterclockwise: MUSIQUE SUIVANTE**")
-                    if(playlist.length > 1){
+                    if(playlist.length >= 1){
                         play(bot.voiceConnections.array()[0],message)
                     }else{
                         message.channel.send('**:no_entry_sign: AUCUNE MUSIQUE DANS LA PLAYLIST **')

@@ -656,11 +656,16 @@ function play(connexion, message){
     msgl.setThumbnail(playlist[0].image)
     playlist[0].msg.channel.send(msgl)
     playlist[0].msg.delete()
-
+    
     var volume =  playlist[0].volume
-    var streamOptions = {volume: volume};
-    const stream = ytdl(playlist[0].url, { filter : 'audioonly'});
-    const dispatcher = connexion.playStream(stream, streamOptions);
+    const ytdl = require('ytdl-core-discord');
+    
+    async function start(connection, url) {
+      connection.playOpusStream(await ytdl(url));
+    }
+    
+    start(connexion, playlist[0].url) 
+    console.log('Done')
 
 }
 

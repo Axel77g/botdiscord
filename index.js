@@ -727,7 +727,7 @@ function commandInfo(message, date){
 
 function commandSay(messagedata,msg,channel, date){
     
-    var msg = msg.split('-')
+    var msg = msg.split('---')
 
     if(msg.length == 1){
 

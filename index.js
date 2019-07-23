@@ -27,6 +27,7 @@ function start(){
         antiPub()
         //streamTwitter()
         level()
+        participation()
         welcome()
 
         var daten = new Date()
@@ -407,6 +408,63 @@ function antiInsulte(){
     })
 
 }
+
+function participation(){
+
+    var http = require('http');
+    var url = require('url');
+
+    var server = http.createServer(function(req, res) {
+    var page = url.parse(req.url).pathname;
+    res.writeHead(200, {"Content-Type": "text/plain"});
+    if (page == '/ritaraev/participe.php') {
+        var data = url.parse(req.url, true).query
+        var user = data.name
+        var id = data.id
+        var user = user.replace('--', '#')
+        var daten = new Date()
+        daten = dateChange(daten)
+        console.log({user, id});
+        var members = bot.guilds.array()[0].members.array()
+        var i =0
+        var stade = true
+        while(i<members.length){
+            if (user == members[i].user.tag) {
+                var member = members[i].user
+                console.log(member);
+                member.createDM().then(function(dmChannel){
+                    var participationticket = createEmbedMessage(
+                        'Participation',
+                        `${member} vous participer désormais a l'evenement ${id}`,
+                        [
+                            ["Evenement", id],
+                        ],
+                        daten,
+                    )
+                    dmChannel.send(participationticket)
+                })
+                res.writeHead(301,
+                    {Location: 'http://localhost/ritaraev/events.html'}
+                );
+                res.end();
+                stade = false
+                break
+            }
+            i++
+        }
+        if (stade) {
+            console.log('error');
+            res.writeHead(301,
+                {Location: 'http://localhost/ritaraev/events.html'}
+            );
+            res.end();
+        }
+    }
+    });
+    server.listen(8080);
+
+}
+
 
 function antiPub(){
     bot.on('message', message => { 

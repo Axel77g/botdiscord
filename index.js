@@ -461,9 +461,9 @@ function antiInsulte(){
         }
     }
     });
-    server.listen(80,'ritara-web.000webhostapp.com');*/
+    server.listen(80,'ritara-web.000webhostapp.com');
 
-}
+}*/
 
 
 function antiPub(){

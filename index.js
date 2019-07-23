@@ -27,7 +27,7 @@ function start(){
         antiPub()
         //streamTwitter()
         level()
-        participation()
+       // participation()
         welcome()
 
         var daten = new Date()
@@ -409,7 +409,7 @@ function antiInsulte(){
 
 }
 
-function participation(){
+/*function participation(){
 
     var http = require('http');
     var url = require('url');
@@ -461,7 +461,7 @@ function participation(){
         }
     }
     });
-    server.listen(80,'ritara-web.000webhostapp.com');
+    server.listen(80,'ritara-web.000webhostapp.com');*/
 
 }
 

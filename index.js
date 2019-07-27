@@ -409,7 +409,7 @@ function antiInsulte(){
 
 }
 
-/*function participation(){
+function participation(){
 
     var http = require('http');
     var url = require('url');
@@ -417,7 +417,7 @@ function antiInsulte(){
     var server = http.createServer(function(req, res) {
     var page = url.parse(req.url).pathname;
     res.writeHead(200, {"Content-Type": "text/plain"});
-    if (page == '/ritaraev/participe.php') {
+    if (page == '/participate.php') {
         var data = url.parse(req.url, true).query
         var user = data.name
         var id = data.id
@@ -461,9 +461,9 @@ function antiInsulte(){
         }
     }
     });
-    server.listen(80,'ritara-web.000webhostapp.com');
+    server.listen(8080);
 
-}*/
+}
 
 
 function antiPub(){

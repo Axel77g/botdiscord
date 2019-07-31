@@ -26,7 +26,7 @@ function start(){
         antiInsulte()
         antiPub()
         //streamTwitter()
-        level()
+        //level()
        // participation()
         welcome()
 

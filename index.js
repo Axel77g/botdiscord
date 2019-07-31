@@ -166,7 +166,7 @@ function commands(){
                         )
                         reportTicket.setAuthor(message.author.username , message.author.avatarURL)
                         message.channel.send(`${message.member} Votre reclamation va être prise en charge`);
-                        bot.channels.get('505507727267856385').send(report);
+                        bot.channels.get('505507727267856385').send(reportTicket);
 
                     }else{
                         error(message, 208)

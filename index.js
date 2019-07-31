@@ -83,7 +83,7 @@ function welcome() {
       
           member.addRole(role);
         // refreh levelpoint
-          level()
+         // level()
         } catch (error) {
       
           console.error(error);
@@ -573,7 +573,7 @@ function writeData(membersSaved){
     })
 }
 
-function level(){
+/*function level(){
 
     var guild = bot.guilds.array()[0]
     var members = guild.members.array()
@@ -628,8 +628,8 @@ function level(){
         }
     }) 
 }
-
-function streamTwitter(){
+*/
+/*function streamTwitter(){
 
     var Twit = require('twit')
 
@@ -661,7 +661,7 @@ function streamTwitter(){
 
         }
     });
-}
+}*/
 
 async function addvideo(c, message){
     var url = c[1]

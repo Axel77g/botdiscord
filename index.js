@@ -409,7 +409,7 @@ function antiInsulte(){
 
 }
 
-function participation(){
+/*function participation(){
 
     var http = require('http');
     var url = require('url');
@@ -463,7 +463,7 @@ function participation(){
     });
     server.listen(8080);
 
-}
+}*/
 
 
 function antiPub(){

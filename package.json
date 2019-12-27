@@ -9,19 +9,7 @@
   "author": "LeFilsAJUL",
   "license": "ISC",
   "dependencies": {
-    "discord-anti-spam": "^1.1.6",
     "discord.js": "^11.4.2",
-    "ffmpeg": "0.0.4",
-    "ffmpeg-binaries": "^4.0.0",
-    "html-entities": "^1.2.1",
-    "m3u8stream": "^0.6.2",
-    "miniget": "^1.5.1",
-    "opusscript": "0.0.6",
-    "sax": "^1.2.4",
-    "twit": "^2.2.11",
-    "ytdl-core": "^0.29.2",
-    "ytdl-core-discord": "^1.0.3",
-    "got":"^9.6.0"
   },
   "devDependencies": {}
 }

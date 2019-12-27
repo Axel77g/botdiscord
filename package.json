@@ -1,46 +1,22 @@
 {
   "name": "carlosbot",
-  "version": "1.1.0",
-  "description": "discordbot",
+  "version": "1.0.0",
+  "description": "bot discorsd",
   "main": "index.js",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^4.0.0",
+    "ffmpeg-static": "^2.7.0",
+    "got": "^10.2.0",
+    "opusscript": "^0.0.7",
+    "ytdl-core": "^1.0.5",
+    "ytdl-core-discord": "^1.0.3"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "LeFilsAJUL",
-  "license": "ISC",
-  "dependencies": {
-    "discord.js": "^11.4.2",
-    "got":"^10.2.0",
-    "ytdl-core":"^1.0.5",
-    "ytdl-core-discord":"^1.0.3",
-    "ffmpeg": {
-        "version": "0.0.4",
-        "resolved": "https://registry.npmjs.org/ffmpeg/-/ffmpeg-0.0.4.tgz",
-        "integrity": "sha1-HEYN+OfaUSf2LO70v6BsWciWMMs=",
-        "requires": {
-          "when": ">= 0.0.1"
-        }
-      },
-      "ffmpeg-binaries": {
-        "version": "4.0.0",
-        "resolved": "https://registry.npmjs.org/ffmpeg-binaries/-/ffmpeg-binaries-4.0.0.tgz",
-        "integrity": "sha512-a4ceKPIB51x7pHEK3BEOoCMgOUOm51MKi8UEOocfDOpN9aHgtTEDGo8SgLRhrRVllNnpNmW9AjkXeySvmeoU1w==",
-        "requires": {
-          "decompress": "^4.2.0",
-          "decompress-tarxz": "^2.1.1",
-          "decompress-unzip": "^4.0.1"
-        }
-      },
-      "ffmpeg-static": {
-        "version": "2.7.0",
-        "resolved": "https://registry.npmjs.org/ffmpeg-static/-/ffmpeg-static-2.7.0.tgz",
-        "integrity": "sha512-Khjg/4tCBen58ixhXlkRNqs3hUKpTOlGOUrw859M09tdjeMkXyXRQ+YuJjGczRhGO7Y8fHPJZcQ37V/OzvZvjQ=="
-      },
-      "opusscript": {
-        "version": "0.0.7",
-        "resolved": "https://registry.npmjs.org/opusscript/-/opusscript-0.0.7.tgz",
-        "integrity": "sha512-DcBadTdYTUuH9zQtepsLjQn4Ll6rs3dmeFvN+SD0ThPnxRBRm/WC1zXWPg+wgAJimB784gdZvUMA57gDP7FdVg=="
-      }
-  },
-  "devDependencies": {}
+  "author": "Axel G",
+  "license": "ISC"
 }

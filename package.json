@@ -13,7 +13,9 @@
     "got":"^10.2.0",
     "ytdl-core":"^1.0.5",
     "ytdl-core-discord":"^1.0.3",
-    "ffmpeg":"^0.0.4"
+    "ffmpeg":"^0.04",
+    "ffmpeg-binaries":"^4.0.0",
+    "opusscript":"^0.0.7"
   },
   "devDependencies": {}
 }

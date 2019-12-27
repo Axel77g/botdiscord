@@ -21,14 +21,14 @@ function start(){
 
         //SET UP BOT
     
-        //commands()
-        /*antiSpam()
+        commands()
+        antiSpam()
         antiInsulte()
-        antiPub()*/
+        antiPub()
         //streamTwitter()
         //level()
        // participation()
-        /*welcome()*/
+        welcome()
 
         var daten = new Date()
         daten = dateChange(daten)

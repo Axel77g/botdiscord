@@ -11,7 +11,7 @@ var antiSpamData = []
 
 
 function start(){
-
+    console.log('start')
     bot.on('ready', () => {
 
 
@@ -976,7 +976,7 @@ function error(msg, code){
     
     return embedmessage
 }
-
+console.log('start')
 start()
 
 function autoPlay(){

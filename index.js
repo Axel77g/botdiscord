@@ -25,6 +25,7 @@ function start(){
         antiSpam()
         antiInsulte()
         antiPub()
+        comu(bot)
         //streamTwitter()
         //level()
        // participation()
@@ -106,6 +107,73 @@ function welcome() {
       });
 
 }
+
+function comu(bot){
+    console.log('e');
+    
+    bot.on('raw', e =>{
+        //Ajout de communauté
+        if (e.t == "MESSAGE_REACTION_ADD") {
+            var channel = e.d.channel_id
+            var emoji = e.d.emoji
+            var guild = e.d.guild_id
+            var user = e.d.user_id
+            guild = bot.guilds.find('id', guild);
+            user = guild.members.find('id', user)
+            if (channel == '608229132710445095') {
+                
+                if (emoji.name == "🕹") {
+
+                    console.log('joueurs');
+                    user.addRole('608242952858370054')
+                    
+                }else if(emoji.name == "🎨"){
+    
+                    console.log('artistes');
+                    user.addRole('608231533572259861')
+                    
+                }else if(emoji.name == "💻"){
+                    console.log('dev');
+                    user.addRole('608223115104878613')
+                }
+
+            }
+            
+            
+        }
+        //Supression de comunauté
+        if (e.t == "MESSAGE_REACTION_REMOVE") {
+            var channel = e.d.channel_id
+            var emoji = e.d.emoji
+            var guild = e.d.guild_id
+            var user = e.d.user_id
+            guild = bot.guilds.find('id', guild);
+            user = guild.members.find('id', user)
+            if (channel == '608229132710445095') {
+                
+                if (emoji.name == "🕹") {
+
+                    console.log('joueurs');
+                    user.removeRole('608242952858370054')
+                    
+                }else if(emoji.name == "🎨"){
+    
+                    console.log('artistes');
+                    user.removeRole('608231533572259861')
+                    
+                }else if(emoji.name == "💻"){
+                    console.log('dev');
+                    user.removeRole('608223115104878613')
+                }
+
+            }
+            
+            
+        }
+
+    });
+}
+
 
 function commands(){
     
